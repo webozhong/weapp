@@ -1,0 +1,14 @@
+<view class="container flex-column">
+  <view class="top-container flex-rest-height">
+    <view style="text-align: center;margin-top:50px;">
+      <icon type="success_circle" size="80" class="logo-image" color="#1AAD19"></icon>
+    </view>
+    <view class="name">
+      <text>反馈成功</text>
+    </view>
+    <view class="about">
+      <text class="about-text">我们认真对待每一条反馈和建议，感谢您的关注与支持！</text>
+    </view>
+    <button type="primary"  bindtap="navigateTo">确定</button>
+  </view>
+</view>

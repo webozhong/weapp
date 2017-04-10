@@ -1,0 +1,48 @@
+.container{
+  background: #F0EFF5;
+}
+
+.cells{
+    margin-top: 40rpx;
+    margin-bottom: 40rpx;
+    font-family: "Microsoft YaHei UI";
+    font-size:28rpx;
+    color:black;
+}
+.cell {
+  width: 100%;
+  font-size: 34rpx;
+  background-color: #FFFFFF;
+  padding: 20rpx 25rpx;
+  display: flex;
+  align-items: center;
+
+}
+.cell-icon{
+  width: 50rpx;
+  height: 50rpx;
+}
+.hr{
+    border-top: 1px solid #E7E7EB;
+}
+.cell-text{
+  flex: 1;
+  margin-left: 30rpx;
+  font-family: "Microsoft YaHei UI";
+  font-size:16px;
+  color:black;
+}
+
+.head{
+  width: 160rpx;
+  height: 160rpx;
+}
+.user-info{
+  margin-left: 40rpx;
+}
+.normal{
+  background-color: #FFFFFF;
+}
+.select{
+  background-color:#D9D9D9;
+}

@@ -1,0 +1,41 @@
+.container{
+  width: 100%;
+}
+.logo{
+  display: flex;
+  justify-content:center;
+}
+
+.logo-image{
+  height: 80rpx;
+  width: 327rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: 30%;
+  background: white;
+}
+.share{
+  width: 70%;
+  height: 6%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30%;
+  margin-left: 15%;
+  background: #2A8AE0;
+  border-radius: 6rpx;
+  
+}
+.share text{
+  display: flex;
+  color: white;
+  text-align: center;
+  font-family: "Microsoft YaHei UI";
+  font-size: 36rpx;
+  align-items:center;
+}
+.copyright{
+  margin-top: 50%;
+  text-align: center;
+  font-family: "Microsoft YaHei UI";
+  font-size: 28rpx;
+}
