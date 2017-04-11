@@ -1,0 +1,14 @@
+<view class="container">
+  <form bindsubmit="formSubmit">
+    <view class="editor">
+      <textarea name="feedback" bindinput="input" maxlength="255" placeholder="请输入您遇到的问题或对我们的建议..." class="editor-text" placeholder-class="placeholder-class" auto-focus/>
+      <view class="contact">
+        <text>联系电话</text>
+        <textarea maxlength="11" placeholder="选填，便于我们联系您"/>
+      </view>
+      <view class="navigator">
+        <navigator url="../success/seccess"><button form-type="submit" type="primary" disabled="{{disabled}}">提交</button></navigator>
+      </view>
+    </view>
+  </form>
+</view>

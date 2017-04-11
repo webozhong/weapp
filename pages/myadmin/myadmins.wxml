@@ -1,0 +1,40 @@
+<view class="container">
+
+  <view class="cells">
+    <view class="cell" bindtap="navToPage">
+      <image class="head" src="{{userInfo.avatarUrl}}"></image>
+      <view class="user-info">
+        <text>{{userInfo.nickName}}</text>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="">
+    <view id="{{array.id[0]}}" class="cell {{array.changeColor[0]?'select':'normal'}}" data-id="0" data-route="faceback/facebacks" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend" >
+      <image class="cell-icon" src="../../images/feedback.png" ></image>
+      <text class="cell-text">反馈</text>
+      <image class="cell-icon" src="../../images/forward.png"></image>
+    </view>
+  </view>
+
+
+  <view class="hr">
+    <view id="{{array.id[1]}}" class="cell {{array.changeColor[1]?'select':'normal'}}" data-id="1" data-route="about/abouts" bindtap="callPhone" bindtouchstart="touchstart" bindtouchend="touchend">
+      <image class="cell-icon" src="../../images/telephone.png"></image>
+      <text class="cell-text" >联系电话</text>
+      <image class="cell-icon" src="../../images/forward.png"></image>
+    </view>
+  </view>
+
+
+  <view class="hr">
+    <view id="{{array.id[2]}}" class="cell {{array.changeColor[2]?'select':'normal'}}" data-id="2" data-route="about/abouts" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend">
+      <image class="cell-icon" src="../../images/about.png"></image>
+      <text class="cell-text" bindtap>关于我们</text>
+      <image class="cell-icon" src="../../images/forward.png"></image>
+    </view>
+  </view>
+
+  
+</view>

@@ -1,0 +1,46 @@
+/**index.wxss**/
+.main{
+  background-color: #F0EFF5;
+  font-family: "微软雅黑";
+  font-size: 26px;
+}
+.info{
+  height: auto;
+  background-color: #FFFFFF;
+  margin-top: 20rpx;
+  padding: 2%;
+}
+.type{
+  float: left;
+  width:33%;
+}
+.title{
+  font-size: 46rpx;
+}
+.source{
+  font-size:26rpx;
+  color: #888888;
+}
+.big{
+  width: 100%;
+  float: none;
+  /*height:400rpx;*/
+}
+.little{
+  height:180px;
+}
+image{
+  overflow: hidden;
+  width: 100%;
+}
+.type.little{
+  height: 100%;
+}
+.type.little image{
+  height:100%;
+  margin-top: 10rpx;
+}
+.type.big image{
+  height:360rpx;
+  margin-top:10rpx;
+}

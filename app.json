@@ -1,0 +1,36 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/myadmin/myadmins",
+    "pages/myadmin/about/abouts",
+    "pages/myadmin/faceback/facebacks",
+    "pages/navigate/navigates",
+    "pages/myadmin/success/seccess"
+    
+  ],
+ "window":{
+
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "遇见书画",
+    "navigationBarBackgroundColor": "#2A8AE0",
+    "backgroundTextStyle": "WeChat"
+  },
+    "tabBar": {
+      "borderStyle": "white",
+      "backgroundColor":"#FFFFFF",
+      "selectedColor":"#2A8AE0",
+    "list": [
+      {
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath":"images/home_unchecked.png",
+      "selectedIconPath":"images/home_selected.png"
+    },{
+      "pagePath": "pages/myadmin/myadmins",
+      "text": "个人",
+      "iconPath":"images/personal_unchecked.png",
+      "selectedIconPath":"images/personal_selected.png"
+    }
+    ]
+  }
+}
