@@ -6,7 +6,7 @@
     "pages/myadmin/faceback/facebacks",
     "pages/navigate/navigates",
     "pages/myadmin/success/seccess"
-    
+   
   ],
  "window":{
 
@@ -27,7 +27,7 @@
       "selectedIconPath":"images/home_selected.png"
     },{
       "pagePath": "pages/myadmin/myadmins",
-      "text": "个人",
+      "text": "我的",
       "iconPath":"images/personal_unchecked.png",
       "selectedIconPath":"images/personal_selected.png"
     }

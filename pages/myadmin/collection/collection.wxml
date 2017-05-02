@@ -1,0 +1,10 @@
+<!--<scroll-view scroll-y="{{true}}" lower-threshold="100px" bindscrolltolower="lower" style="height:{{hs}}px">
+  <view class="main" wx:for="{{collections}}">
+    <navigator url="../../navigate/navigates?data={{item.sourceName}}·{{item.date}}&title={{item.title}}&id={{item.id}}" hover-class="navigator-hover" style="display:block;height:100%">
+      <!--标题-->
+      <!--<text class="title" style="margin:5px 0;display:inline-block" >风景画的真好，脱俗田园，我愿身临其境</text>-->
+      <!--出处-->
+      <!--<text class="source">最绘画</text>
+    </navigator>
+  </view>
+</scroll-view>-->

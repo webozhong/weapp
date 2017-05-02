@@ -16,6 +16,10 @@
 }
 .title{
   font-size: 46rpx;
+  /*width:600rpx;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;*/
 }
 .source{
   font-size:26rpx;
@@ -27,20 +31,51 @@
   /*height:400rpx;*/
 }
 .little{
-  height:180px;
+  /*height:30%;*/
+  overflow:hidden;
 }
 image{
   overflow: hidden;
   width: 100%;
 }
 .type.little{
-  height: 100%;
+  height: 180rpx;
 }
 .type.little image{
-  height:100%;
+  height:200rpx;
   margin-top: 10rpx;
 }
 .type.big image{
   height:360rpx;
   margin-top:10rpx;
 }
+/*.banner{
+  width:100%;
+  height:400rpx;
+}*/
+.backToTop{
+  position:fixed;
+  right:40rpx;
+  bottom:50rpx;
+  width:40px;
+  height:40px;
+  /*border:2px solid #888888;*/
+  /*border-radius:50%;*/
+  display:block;
+}
+.backToTop image{
+  display:block;
+  width:40px;
+  height:40px;
+  margin:0 auto;
+}
+/*.swiper-item{
+  position:relative;
+}
+.banner-title{
+  position:absolute;
+  left:20rpx;
+  bottom:60rpx;
+  font-size:30rpx;
+  color:#fff;
+}*/

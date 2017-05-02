@@ -1,4 +1,5 @@
 /* pages/navigate/navigates.wxss */
+
 .title {
     font-family: "微软雅黑";
     font-size:60rpx;
@@ -9,7 +10,7 @@
 text{
     display: inline-block;
     font-size: 32rpx;
-    line-height: 40rpx;
+    line-height: 56rpx;
     font-family: "黑体";
     margin:0 30rpx;
 }
@@ -23,3 +24,28 @@ image{
     /*font-weight:bold;*/
     color:#ccc;
 }
+.content{
+    width:100%;
+    padding-bottom:100rpx;
+}
+/*.bottomBar{
+    width:100%;
+    height:100rpx;
+    background-color: #ddd;
+    position:fixed;
+    bottom:0;
+    left:0;
+}
+
+.collection{
+    position:absolute;
+    left:10rpx;
+    top:-10rpx;
+    width:60rpx;
+    height:60rpx;
+}
+.tip{
+    position:absolute;
+    left:80rpx;
+    top:25rpx;
+}*/

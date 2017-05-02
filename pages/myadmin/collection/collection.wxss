@@ -1,0 +1,11 @@
+/*.main{
+    padding:10px;
+    border-bottom:1px solid #ccc;
+}
+.title{
+    font-size:50rpx;
+}
+.source{
+    font-size:30rpx;
+    color:#ccc;
+}*/

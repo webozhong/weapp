@@ -1,10 +1,11 @@
 let app = getApp()
 Page({
   data: {
+    openid:"",
     userInfo: {},
     js_code: "",
     array: {
-      id: [0, 1, 2],
+      id: [0, 1, 2,3],
       changeColor: [false, false, false]
     }
   },
@@ -16,13 +17,19 @@ Page({
     }
   },
   onLoad() {
-    var that = this
+    var that = this;
     app.getUserInfo(userInfo => {
-      this.setData({
+      that.setData({
         userInfo: userInfo,
         color: "#fff"
-      })
+      })  
+      
     })
+    
+    // app.getUserInfo();
+    // var userInfo = wx.getStorageSync('userInfo');
+    // that.setData({userInfo:userInfo.userInfo});
+    // console.log(userInfo);
   },
   //点击跳转
   navToPage(event) {
