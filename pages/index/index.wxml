@@ -29,7 +29,6 @@
 
       <!--每一项的标题-->
       <text class="title" style="margin:5px 0;display:inline-block">{{item.title}}</text>
-
       <view style="width:100%;height:40%;padding-bottom:5px">
         <view class="type {{item.type==0? 'big' : 'little'}}">
           <image style="width:100%; background-color: #fff;" mode="aspectFill" src="https://www.webozhong.com/thumbnails/{{item.thumbnails[0]}}">
@@ -44,9 +43,12 @@
           </image>
         </view>
       </view>
-
+      
       <!--每一项的出处与时间-->
-      <text class="source">{{item.sourceName}}·{{item.date}}</text>
+      <view class="source">
+        <text >{{item.sourceName}}·{{item.date}}</text>
+      </view> 
+      <view class="hr"></view>
     </navigator>
   </view>
 </scroll-view>

@@ -1,18 +1,21 @@
 /* pages/navigate/navigates.wxss */
-
 .title {
+    /*border: 1px red solid;*/
     font-family: "微软雅黑";
-    font-size:60rpx;
+    font-size:44rpx;
     text-align: center;
-    margin: 30rpx; 
+    margin-left: 30rpx;
+    margin-right: 30rpx; 
+    margin-bottom: 10rpx;
+    margin-top: 40rpx; 
     font-weight:bold;
 }
 text{
     display: inline-block;
     font-size: 32rpx;
-    line-height: 56rpx;
+    line-height: 50rpx;
     font-family: "黑体";
-    margin:0 30rpx;
+    margin:0 20rpx;
 }
 image{
     width: 100%;
@@ -20,7 +23,7 @@ image{
 }
 .data{
     font-size: 24rpx;
-    margin-bottom:30rpx;
+    margin-bottom:14rpx;
     /*font-weight:bold;*/
     color:#ccc;
 }
