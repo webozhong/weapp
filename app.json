@@ -5,11 +5,10 @@
     "pages/myadmin/about/abouts",
     "pages/myadmin/faceback/facebacks",
     "pages/navigate/navigates",
-    "pages/myadmin/success/seccess"
-   
+    "pages/myadmin/success/seccess",
+    "pages/myadmin/collection/collections"
   ],
  "window":{
-
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "遇见书画",
     "navigationBarBackgroundColor": "#2A8AE0",

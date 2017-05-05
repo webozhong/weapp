@@ -1,16 +1,14 @@
 
 <!--index.wxml-->
-<!--<loading hidden="{{hidden}}" bindChange="loadingChange">
-  加载中...
-</loading>-->
-<scroll-view class="main" scroll-y="{{true}}"  bindscrolltolower="lower" style="height:{{hs}}px" bindscroll="scrollTo" scroll-top="{{scrollTop}}" bindscrolltoupper="refresh" upper-threshold="50px">
 
+<view class="main" enable-back-to-top="true" scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{hs}}px;" bindscrolltolower="lower" bindscroll="scrollTo" bindscrolltoupper="refresh" upper-threshold="50px">
   <!--回到顶部按钮-->
-    <view class="backToTop" bindtap="backToTop" wx:if="{{floorstatus}}">
-      <image src="../../images/backToTop2.png"/>
-    </view>
+  <view class="backToTop" bindtap="backToTop" wx:if="{{floorstatus}}">
+    <image src="../../images/backToTop2.png" />
+  </view>
 
   <!--轮播图-->
+
   <!--<swiper class="banner" indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" circular="true">
     <block wx:for="{{imgUrls}}">
     <navigator url="../navigate/navigates?data={{item.sourceName}}·{{item.date}}&title={{item.title}}&id={{item.id}}">
@@ -22,9 +20,7 @@
       
     </block>
   </swiper>-->
-
   <view wx:for="{{list}}" class="info {{item.type==0? 'big' : 'little'}}" wx:key="{{item.id}}">
-
     <navigator url="../navigate/navigates?data={{item.sourceName}}·{{item.date}}&title={{item.title}}&id={{item.id}}" hover-class="navigator-hover" style="display:block;height:100%">
 
       <!--每一项的标题-->
@@ -43,12 +39,12 @@
           </image>
         </view>
       </view>
-      
+
       <!--每一项的出处与时间-->
       <view class="source">
-        <text >{{item.sourceName}}·{{item.date}}</text>
-      </view> 
+        <text>{{item.sourceName}}·{{item.date}}</text>
+      </view>
       <view class="hr"></view>
     </navigator>
   </view>
-</scroll-view>
+</view>

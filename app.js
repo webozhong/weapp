@@ -1,27 +1,44 @@
 //app.js
-//app.js
-
-
 App({
-  globalData: {
-    userInfo: "",
-    js_code: "",
-    openid: "",
-    session_key: ""
+  onLaunch: function (){
+    wx.login({
+      success: function (res) {
+        wx.request({
+          url: 'https://www.webozhong.com/api/users/login',
+          data: {
+            code: res.code,
+          },
+          success: function (res) {
+            //获取openid
+            var openid = JSON.parse(res.data).openid;
+            //获取session_key
+            var session_key = JSON.parse(res.data).session_key;
+            //将用户openid和session_key信息存入Storage中方便读取
+            var obj = {};
+            obj.openid = openid;
+            obj.session_key = session_key
+            wx.setStorageSync('user', obj);
+          },
+          //fail or complete TODO
+        })
+      },
+      //fail or complete TODO      
+    })
   },
-  
+
+  globalData: {
+    userInfo: ""
+  },
   getUserInfo: function (cb) {
     var that = this;
-
-    var users = wx.getStorageSync('users') || {};
+    var user = wx.getStorageSync('user') || {};
     var userInfo = wx.getStorageSync('userInfo') || {};
-
     if (that.globalData.userInfo) {
       typeof cb == "function" && cb(that.globalData.userInfo)
     } else {
       wx.login({
         success: res => {
-          that.globalData.js_code = res.code; 
+          that.globalData.js_code = res.code;
           wx.getUserInfo({
             success: res => {
               that.globalData.userInfo = res.userInfo;
@@ -30,48 +47,16 @@ App({
               objz.userInfo = res.userInfo;
               wx.setStorageSync('userInfo', objz)
               typeof cb == "function" && cb(that.globalData.userInfo);
-              // 请求官方接口，获取openid和session_key
-              wx.request({
-                url: "https://api.weixin.qq.com/sns/jscode2session",
-                data: {
-                  appid: "wx71342e901702563e",
-                  secret: "35c7ae455cbaba53adb3c11b054b7093",
-                  js_code: that.globalData.js_code,
-                  grant_type: "authorization_code"
-                },
-                success: res => {
-                  that.globalData.openid = res.data.openid;
-                  that.globalData.session_key = res.data.session_key;
-                  var obj = {};
-                  console.log(res.data, that);
-                  obj.openid = res.data.openid;
-                  obj.session_key = res.data.session_key;
-                  wx.setStorageSync('users', obj);
-                  
-                  // console.log(that.globalData.userInfo);
-                  console.log(users, userInfo);
-                },
-                fail: function () {
-
-                }
-              })
-
-              // ajaxUserInfo(url, data);
-
             }
           })
         },
-        fail:function(){
+        fail: function () {
           wx.clearStorage();
         }
       })
     }
-
   }
-
 })
-
-
 // function ajaxUserInfo(url, data) {
 //   var xhr = new XMLHttpRequest();
 //   if (xhr) {

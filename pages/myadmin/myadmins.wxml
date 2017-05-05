@@ -10,8 +10,17 @@
     </view>
   </view>
 
+  <!--我的收藏-->
+  <!--<view class="hr">
+    <view id="{{array.id[3]}}" class="cell {{array.changeColor[3]?'select':'normal'}}" data-id="3" data-route="collection/collections" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend">
+      <image class="cell-icon" src="../../images/collection.png"></image>
+      <text class="cell-text" bindtap>我的收藏</text>
+      <image class="cell-icon" src="../../images/forward.png"></image>
+    </view>
+  </view>-->
+
   <!--反馈-->
-  <view class="">
+  <view class="hr">
     <view id="{{array.id[0]}}" class="cell {{array.changeColor[0]?'select':'normal'}}" data-id="0" data-route="faceback/facebacks" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend" >
       <image class="cell-icon" src="../../images/feedback.png" ></image>
       <text class="cell-text">反馈</text>
@@ -36,15 +45,4 @@
       <image class="cell-icon" src="../../images/forward.png"></image>
     </view>
   </view>
-
-  <!--我的收藏-->
-  <!--<view class="hr">
-    <view id="{{array.id[3]}}" class="cell {{array.changeColor[3]?'select':'normal'}}" data-id="3" data-route="collection/collection" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend">
-      <image class="cell-icon" src="../../images/collection2.png"></image>
-      <text class="cell-text" bindtap>我的收藏</text>
-      <image class="cell-icon" src="../../images/forward.png"></image>
-    </view>
-  </view>-->
-
-  
 </view>

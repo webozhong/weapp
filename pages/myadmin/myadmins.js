@@ -1,11 +1,11 @@
-let app = getApp()
+let app = getApp();
 Page({
   data: {
-    openid:"",
+    openid: "",
     userInfo: {},
     js_code: "",
     array: {
-      id: [0, 1, 2,3],
+      id: [0, 1, 2, 3],
       changeColor: [false, false, false]
     }
   },
@@ -22,10 +22,10 @@ Page({
       that.setData({
         userInfo: userInfo,
         color: "#fff"
-      })  
-      
+      })
+
     })
-    
+
     // app.getUserInfo();
     // var userInfo = wx.getStorageSync('userInfo');
     // that.setData({userInfo:userInfo.userInfo});
@@ -66,8 +66,6 @@ Page({
       array: array
     })
   },
-
-  
   //点击弹窗，是否拨打
   callPhone() {
     wx.showModal({
@@ -89,6 +87,5 @@ Page({
         }
       }
     })
-
   }
 })

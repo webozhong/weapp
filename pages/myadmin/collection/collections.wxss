@@ -1,4 +1,4 @@
-/*.main{
+.main{
     padding:10px;
     border-bottom:1px solid #ccc;
 }
@@ -8,4 +8,4 @@
 .source{
     font-size:30rpx;
     color:#ccc;
-}*/
+}
