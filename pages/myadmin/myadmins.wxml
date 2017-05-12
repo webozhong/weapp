@@ -11,13 +11,13 @@
   </view>
 
   <!--我的收藏-->
-  <!--<view class="hr">
+  <view class="hr">
     <view id="{{array.id[3]}}" class="cell {{array.changeColor[3]?'select':'normal'}}" data-id="3" data-route="collection/collections" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend">
       <image class="cell-icon" src="../../images/collection.png"></image>
       <text class="cell-text" bindtap>我的收藏</text>
       <image class="cell-icon" src="../../images/forward.png"></image>
     </view>
-  </view>-->
+  </view>
 
   <!--反馈-->
   <view class="hr">

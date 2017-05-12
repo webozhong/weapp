@@ -50,19 +50,16 @@ Page({
     scrollTop: 0,
     floorstatus: null,
   },
-
   //上拉加载
   onReachBottom: function () {
     var that = this;
     key = true;
     GetList(that);
-    console.log("view的上拉加载");
   },
 
   //下拉刷新
   onPullDownRefresh: function () {
     var that = this;
-    console.log("view的下拉刷新");
     that.setData({ hidden: false });
     wx.request({
       url: url,
@@ -84,15 +81,11 @@ Page({
           list: lists,
           hidden: true
         });
-
         //重置page的值保证刷新后的数据不丢失
         currentPage = 1;
         res.data.page = 1;
         console.log(res);
       },
-      fail: function () {
-      },
-
     })
     wx.stopPullDownRefresh();
   },
@@ -108,20 +101,37 @@ Page({
 
   onLoad: function (options) {
     var that = this;
-    // app.getUserInfo();
-    // var users = wx.getStorageSync('users');
-    // var userInfo = wx.getStorageSync('userInfo');
-    // that.setData({
-    //   userInfo:userInfo.userInfo,
-    //   openid:users.openid
-    // });
-    // console.log(wx.getStorageSync('users'),users.openid);
-    // console.log(that.data.userInfo,that.data.openid);
-    // var openId = that.data.openid;
-    // console.log(openId);
-    //调用轮播图
-    // Banner(that);
-
+    app.getUserInfo(userInfo => {
+      that.setData({
+        userInfo: userInfo,
+        color: "#fff"
+      })
+      wx.setStorageSync('userInfo', userInfo);
+    })
+    wx.request({
+      url: 'https://www.webozhong.com/api/users/saveuserinfo',
+      data: {
+        openid: wx.getStorageSync('user').openid,
+        nickName: wx.getStorageSync('userInfo').nickName,
+        avatarUrl: wx.getStorageSync('userInfo').avatarUrl,
+        gender: wx.getStorageSync('userInfo').gender, //性别 0：未知、1：男、2：女
+        province: wx.getStorageSync('userInfo').province,
+        city: wx.getStorageSync('userInfo').city,
+        country: wx.getStorageSync('userInfo').country
+      },
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      header: { 'content-type': 'application/x-www-form-urlencoded' }, // 设置请求的 header
+      success: function (res) {
+        // success
+        console.log(res.data);
+      },
+      fail: function (res) {
+        console.log('保存用户信息失败');
+      },
+      complete: function (res) {
+        // complete
+      }
+    })
     var h = 0;
     //获取屏幕信息  
     wx.getSystemInfo({

@@ -21,7 +21,7 @@
     </block>
   </swiper>-->
   <view wx:for="{{list}}" class="info {{item.type==0? 'big' : 'little'}}" wx:key="{{item.id}}">
-    <navigator url="../navigate/navigates?data={{item.sourceName}}·{{item.date}}&title={{item.title}}&id={{item.id}}" hover-class="navigator-hover" style="display:block;height:100%">
+    <navigator url="../navigate/navigates?id={{item.id}}" hover-class="navigator-hover" style="display:block;height:100%">
 
       <!--每一项的标题-->
       <text class="title" style="margin:5px 0;display:inline-block">{{item.title}}</text>

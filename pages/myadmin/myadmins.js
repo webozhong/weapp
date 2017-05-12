@@ -9,27 +9,39 @@ Page({
       changeColor: [false, false, false]
     }
   },
-  onShareAppMessage: function () {
-    return {
-      title: '遇见书画',
-      desc: '遇见书画，遇见最美好的你！',
-      path: '/pages/myadmin/myadmins'
-    }
-  },
-  onLoad() {
-    var that = this;
-    app.getUserInfo(userInfo => {
-      that.setData({
-        userInfo: userInfo,
-        color: "#fff"
+
+  onLoad(){
+    // var that = this;
+    // app.getUserInfo(userInfo => {
+      this.setData({
+        userInfo: wx.getStorageSync('userInfo'),
       })
-
-    })
-
-    // app.getUserInfo();
-    // var userInfo = wx.getStorageSync('userInfo');
-    // that.setData({userInfo:userInfo.userInfo});
-    // console.log(userInfo);
+    //   wx.setStorageSync('userInfo', userInfo);
+    // })
+    // wx.request({
+    //   url: 'https://www.webozhong.com/api/users/saveuserinfo',
+    //   data: {
+    //     openid : wx.getStorageSync('user').openid,
+    //     nickName : wx.getStorageSync('userInfo').nickName,
+    //     avatarUrl : wx.getStorageSync('userInfo').avatarUrl,
+    //     gender : wx.getStorageSync('userInfo').gender, //性别 0：未知、1：男、2：女
+    //     province : wx.getStorageSync('userInfo').province,
+    //     city : wx.getStorageSync('userInfo').city,
+    //     country : wx.getStorageSync('userInfo').country
+    //   },
+    //   method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+    //   header: {'content-type': 'application/x-www-form-urlencoded'}, // 设置请求的 header
+    //   success: function(res){
+    //     // success
+    //     console.log(res.data);
+    //   },
+    //   fail: function(res) {
+    //     console.log('保存用户信息失败');
+    //   },
+    //   complete: function(res){
+    //     // complete
+    //   }
+    // })
   },
   //点击跳转
   navToPage(event) {

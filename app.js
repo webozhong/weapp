@@ -14,15 +14,15 @@ App({
             //获取session_key
             var session_key = JSON.parse(res.data).session_key;
             //将用户openid和session_key信息存入Storage中方便读取
-            var obj = {};
-            obj.openid = openid;
-            obj.session_key = session_key
-            wx.setStorageSync('user', obj);
+            var user = {};
+            user.openid = openid;
+            user.session_key = session_key
+            wx.setStorageSync('user', user);
           },
           //fail or complete TODO
         })
       },
-      //fail or complete TODO      
+      //fail or complete TODO
     })
   },
 

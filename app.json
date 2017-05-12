@@ -6,7 +6,8 @@
     "pages/myadmin/faceback/facebacks",
     "pages/navigate/navigates",
     "pages/myadmin/success/seccess",
-    "pages/myadmin/collection/collections"
+    "pages/myadmin/collection/collections",
+    "pages/share/shares"
   ],
  "window":{
     "navigationBarTextStyle": "white",

@@ -1,6 +1,15 @@
-/* pages/navigate/navigates.wxss */
+/* pages/share/shares.wxss */
+.more{ 
+  background-color: #F3F4F5;
+  height: 70rpx;
+  text-align: center;
+}
+.moretext{
+  font-family: "微软雅黑";
+  font-size: 32rpx;
+  line-height: 70rpx;
+}
 .title {
-    /*border: 1px red solid;*/
     font-family: "微软雅黑";
     font-size:44rpx;
     text-align: center;
@@ -24,7 +33,6 @@ image{
 .date{
     font-size: 24rpx;
     margin-bottom:14rpx;
-    /*font-weight:bold;*/
     color:#ccc;
 }
 .content{
@@ -39,28 +47,4 @@ image{
     position:fixed;
     bottom:0;
     left:0;
-}
-
-.collection{
-    position:absolute;
-    left:10rpx;
-    top:-10rpx;
-    width:60rpx;
-    height:60rpx;
-}
-.tip{
-    position:absolute;
-    left:100rpx;
-    top:26rpx;
-    color: #9499A0;
-    font-size: 30rpx;
-    font-family: "微软雅黑";
-}
-.tiptext{
-  position: absolute;
-  right: 30rpx;
-  top:30rpx;
-  font-size: 30rpx;
-  color: #9499A0;
-  font-family: "微软雅黑";
 }
