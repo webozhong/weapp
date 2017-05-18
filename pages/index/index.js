@@ -37,7 +37,6 @@ var GetList = function (that) {
     })
   }
 }
-
 Page({
   data: {
     hidden: true,
@@ -101,37 +100,6 @@ Page({
 
   onLoad: function (options) {
     var that = this;
-    app.getUserInfo(userInfo => {
-      that.setData({
-        userInfo: userInfo,
-        color: "#fff"
-      })
-      wx.setStorageSync('userInfo', userInfo);
-    })
-    wx.request({
-      url: 'https://www.webozhong.com/api/users/saveuserinfo',
-      data: {
-        openid: wx.getStorageSync('user').openid,
-        nickName: wx.getStorageSync('userInfo').nickName,
-        avatarUrl: wx.getStorageSync('userInfo').avatarUrl,
-        gender: wx.getStorageSync('userInfo').gender, //性别 0：未知、1：男、2：女
-        province: wx.getStorageSync('userInfo').province,
-        city: wx.getStorageSync('userInfo').city,
-        country: wx.getStorageSync('userInfo').country
-      },
-      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      header: { 'content-type': 'application/x-www-form-urlencoded' }, // 设置请求的 header
-      success: function (res) {
-        // success
-        console.log(res.data);
-      },
-      fail: function (res) {
-        console.log('保存用户信息失败');
-      },
-      complete: function (res) {
-        // complete
-      }
-    })
     var h = 0;
     //获取屏幕信息  
     wx.getSystemInfo({
@@ -153,16 +121,16 @@ Page({
   },
 
   //回到顶部
-  backToTop: function () {
-    this.setData({ scrollTop: 0 });
-    // console.log(event);
-  },
+  // backToTop: function () {
+  //   this.setData({ scrollTop: 0 });
+  //   // console.log(event);
+  // },
   //滚动显隐回到顶部按钮
-  scrollTo: function (event) {
-    if (event.detail.scrollTop > 1000) {
-      this.setData({ floorstatus: true });
-    } else {
-      this.setData({ floorstatus: false });
-    }
-  }
+  // scrollTo: function (event) {
+  //   if (event.detail.scrollTop > 1000) {
+  //     this.setData({ floorstatus: true });
+  //   } else {
+  //     this.setData({ floorstatus: false });
+  //   }
+  // }
 })

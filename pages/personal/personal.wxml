@@ -1,18 +1,18 @@
 <view class="container">
 
   <!--顶部个人信息-->
-  <view class="cells">
+  <view class="cells" bindtap="onclick">
     <view class="cell">
-      <image class="head" src="{{userInfo.avatarUrl}}"></image>
+      <image class="head" src="{{user.avatarUrl}}"></image>
       <view class="user-info">
-        <text>{{userInfo.nickName}}</text>
+        <text>{{user.nickName}}</text>
       </view>
     </view>
   </view>
 
   <!--我的收藏-->
   <view class="hr">
-    <view id="{{array.id[3]}}" class="cell {{array.changeColor[3]?'select':'normal'}}" data-id="3" data-route="collection/collections" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend">
+    <view id="{{array.id[3]}}" class="cell {{array.changeColor[3]?'select':'normal'}}" data-id="3" data-route="../collection/collection" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend">
       <image class="cell-icon" src="../../images/collection.png"></image>
       <text class="cell-text" bindtap>我的收藏</text>
       <image class="cell-icon" src="../../images/forward.png"></image>
@@ -21,7 +21,7 @@
 
   <!--反馈-->
   <view class="hr">
-    <view id="{{array.id[0]}}" class="cell {{array.changeColor[0]?'select':'normal'}}" data-id="0" data-route="faceback/facebacks" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend" >
+    <view id="{{array.id[0]}}" class="cell {{array.changeColor[0]?'select':'normal'}}" data-id="0" data-route="../feedback/feedback" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend" >
       <image class="cell-icon" src="../../images/feedback.png" ></image>
       <text class="cell-text">反馈</text>
       <image class="cell-icon" src="../../images/forward.png"></image>
@@ -30,7 +30,7 @@
 
   <!--联系电话-->
   <view class="hr">
-    <view id="{{array.id[1]}}" class="cell {{array.changeColor[1]?'select':'normal'}}" data-id="1" data-route="about/abouts" bindtap="callPhone" bindtouchstart="touchstart" bindtouchend="touchend">
+    <view id="{{array.id[1]}}" class="cell {{array.changeColor[1]?'select':'normal'}}" data-id="1" data-route="" bindtap="callPhone" bindtouchstart="touchstart" bindtouchend="touchend">
       <image class="cell-icon" src="../../images/telephone.png"></image>
       <text class="cell-text" >联系电话</text>
       <image class="cell-icon" src="../../images/forward.png"></image>
@@ -39,7 +39,7 @@
 
   <!--关于我们-->
   <view class="hr">
-    <view id="{{array.id[2]}}" class="cell {{array.changeColor[2]?'select':'normal'}}" data-id="2" data-route="about/abouts" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend">
+    <view id="{{array.id[2]}}" class="cell {{array.changeColor[2]?'select':'normal'}}" data-id="2" data-route="../about/about" bindtap="navToPage" bindtouchstart="touchstart" bindtouchend="touchend">
       <image class="cell-icon" src="../../images/about.png"></image>
       <text class="cell-text" bindtap>关于我们</text>
       <image class="cell-icon" src="../../images/forward.png"></image>

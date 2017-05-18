@@ -1,47 +1,32 @@
 let app = getApp();
 Page({
   data: {
-    openid: "",
-    userInfo: {},
-    js_code: "",
     array: {
       id: [0, 1, 2, 3],
       changeColor: [false, false, false]
-    }
+    },
   },
+  onLoad: function () {
 
-  onLoad(){
-    // var that = this;
-    // app.getUserInfo(userInfo => {
+  },
+  onShow: function () {
+    //如果用户未登录，设置头像跟昵称初始值
+    var isLogin = wx.getStorageSync('isLogin');
+    var user = wx.getStorageSync('user');
+    console.log(wx.getStorageSync('user'));
+    if (isLogin != "Y") {
+      var user = {
+        nickName: '未登录',
+        avatarUrl: '../../images/user.png'
+      }
       this.setData({
-        userInfo: wx.getStorageSync('userInfo'),
+        user: user,
       })
-    //   wx.setStorageSync('userInfo', userInfo);
-    // })
-    // wx.request({
-    //   url: 'https://www.webozhong.com/api/users/saveuserinfo',
-    //   data: {
-    //     openid : wx.getStorageSync('user').openid,
-    //     nickName : wx.getStorageSync('userInfo').nickName,
-    //     avatarUrl : wx.getStorageSync('userInfo').avatarUrl,
-    //     gender : wx.getStorageSync('userInfo').gender, //性别 0：未知、1：男、2：女
-    //     province : wx.getStorageSync('userInfo').province,
-    //     city : wx.getStorageSync('userInfo').city,
-    //     country : wx.getStorageSync('userInfo').country
-    //   },
-    //   method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-    //   header: {'content-type': 'application/x-www-form-urlencoded'}, // 设置请求的 header
-    //   success: function(res){
-    //     // success
-    //     console.log(res.data);
-    //   },
-    //   fail: function(res) {
-    //     console.log('保存用户信息失败');
-    //   },
-    //   complete: function(res){
-    //     // complete
-    //   }
-    // })
+    } else if (isLogin == "Y") {
+      this.setData({
+        user: wx.getStorageSync('user'),
+      })
+    }
   },
   //点击跳转
   navToPage(event) {
@@ -78,7 +63,7 @@ Page({
       array: array
     })
   },
-  //点击弹窗，是否拨打
+  //拨号
   callPhone() {
     wx.showModal({
       title: '联系我们',
@@ -99,5 +84,24 @@ Page({
         }
       }
     })
+  },
+
+  //点击头像栏的操作，如果未登录则调起登录
+  onclick: function () {
+    var isLogin = wx.getStorageSync('isLogin');
+    var user = wx.getStorageSync('user');
+    if (isLogin == "") {
+      //console.log('用户未登录且未调起过app.login方法');
+      app.login();
+    }
+    else if (isLogin == "N") {
+      //console.log('用户调起过app.login方法,但是拒绝了授权');
+      app.openSetting();
+    } else if (isLogin == "Y"){
+      //console.log('用户已经是登录状态了');
+      this.setData({
+        user:user
+      })
+    }
   }
 })

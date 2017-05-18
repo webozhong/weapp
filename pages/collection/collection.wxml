@@ -1,0 +1,23 @@
+<scroll-view scroll-y="{{true}}" lower-threshold="100px" bindscrolltolower="lower" style="height:{{hs}}px" wx:if="{{!noList}}">
+  <view class="main" wx:for="{{list}}" wx:key="list">
+    <navigator class="nav" url="../navigate/navigate?data={{item.sourceName}}·{{item.date}}&title={{item.title}}&id={{item.id}}" hover-class="navigator-hover">
+      <view class="text">
+        <text class="title">{{item.title}}</text>
+      </view>
+      <image class="thumbnails" src="https://www.webozhong.com/thumbnails/{{item.thumbnails}}"></image>
+    </navigator>
+  </view>
+</scroll-view>
+
+<!--如果用户收藏列表中没有数据，渲染此模板-->
+<view class="noList" wx:if="{{noList}}">
+  <image src="../../images/noArticle.png" class="noImg"></image>
+  <view class="noText">
+    <text>你还没有任何收藏 去首页看看自己喜欢的文章吧！</text>
+  </view>
+  <view class="noNav">
+    <navigator url="../index/index" open-type="switchTab">
+      逛逛首页
+    </navigator>
+  </view>
+</view>
