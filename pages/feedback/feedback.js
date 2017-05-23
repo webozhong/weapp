@@ -40,8 +40,8 @@ Page({
         message:e.detail.value.message,
         number:e.detail.value.number
       },
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      header: { 'content-type': 'application/x-www-form-urlencoded' },
       success: function(res){
         console.log(res);
         console.log(res.data);

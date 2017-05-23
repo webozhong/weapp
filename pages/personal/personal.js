@@ -5,26 +5,23 @@ Page({
       id: [0, 1, 2, 3],
       changeColor: [false, false, false]
     },
+
+    //设置头像昵称初始值
+    user : {
+      nickName: '点击登录',
+      avatarUrl: '../../images/user.png'
+    }
   },
   onLoad: function () {
 
   },
   onShow: function () {
-    //如果用户未登录，设置头像跟昵称初始值
     var isLogin = wx.getStorageSync('isLogin');
     var user = wx.getStorageSync('user');
-    console.log(wx.getStorageSync('user'));
-    if (isLogin != "Y") {
-      var user = {
-        nickName: '未登录',
-        avatarUrl: '../../images/user.png'
-      }
+    //console.log(user);
+    if (isLogin == "Y") {
       this.setData({
         user: user,
-      })
-    } else if (isLogin == "Y") {
-      this.setData({
-        user: wx.getStorageSync('user'),
       })
     }
   },
@@ -64,28 +61,27 @@ Page({
     })
   },
   //拨号
-  callPhone() {
-    wx.showModal({
-      title: '联系我们',
-      content: '075523572397',
-      success: function (res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-          wx.makePhoneCall({
-            phoneNumber: '075523572397',
-            success: function (res) {
+  // callPhone() {
+  //   wx.showModal({
+  //     title: '联系我们',
+  //     content: '075523572397',
+  //     success: function (res) {
+  //       if (res.confirm) {
+  //         console.log('用户点击确定')
+  //         wx.makePhoneCall({
+  //           phoneNumber: '075523572397',
+  //           success: function (res) {
 
-            },
-            fail: function () {
-            },
-            complete: function () {
-            }
-          })
-        }
-      }
-    })
-  },
-
+  //           },
+  //           fail: function () {
+  //           },
+  //           complete: function () {
+  //           }
+  //         })
+  //       }
+  //     }
+  //   })
+  // },
   //点击头像栏的操作，如果未登录则调起登录
   onclick: function () {
     var isLogin = wx.getStorageSync('isLogin');
@@ -97,10 +93,11 @@ Page({
     else if (isLogin == "N") {
       //console.log('用户调起过app.login方法,但是拒绝了授权');
       app.openSetting();
-    } else if (isLogin == "Y"){
+    }
+    else if (isLogin == "Y") {
       //console.log('用户已经是登录状态了');
       this.setData({
-        user:user
+        user: user
       })
     }
   }

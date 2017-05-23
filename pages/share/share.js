@@ -1,4 +1,3 @@
-// pages/shares.js
 var ws = 0;
 Page({
   data: {
@@ -14,7 +13,7 @@ Page({
     return {
       title: '遇见书画',
       desc: '遇见书画，遇见最美好的你！',
-      path: '/pages/share/shares?id=' + that.data.id + '&act=1'
+      path: '/pages/share/share?id=' + that.data.id
     }
   },
   onLoad: function (options) {

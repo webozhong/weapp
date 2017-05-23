@@ -12,9 +12,9 @@ var GetList = function (that) {
       data: {
         page: currentPage
       },
-      header: {
-        'content-type': 'application/json'
-      },
+      // header: {
+      //   'content-type': 'application/json'
+      // },
       success: function (res) {
         //console.log(1, res, currentPage, res.data.page);
         if (currentPage == res.data.page) {

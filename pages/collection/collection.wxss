@@ -7,7 +7,7 @@
   height: max-content;
 }
 .text{
-  width: 70%;
+  width: 65%;
   float: left;
 }
 .title {
@@ -15,6 +15,7 @@
   font-size: 36rpx;
 }
 .thumbnails {
+  margin-left: 5%;
   width: 30%;
   height: 150rpx;
 }

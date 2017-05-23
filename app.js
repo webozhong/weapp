@@ -8,7 +8,6 @@ App({
    * isLogin == "N"  代表用户调起过wx.login接口但是点击了拒绝，此时用户仍然未登录
    * isLogin == "Y"  代表用户通过wx.login接口或者wx.openSetting接口同意了登录授权，此时user值可用
    */
-  
   login: function () {
     wx.login({
       success: function (res) {
@@ -84,6 +83,6 @@ App({
           that.login();
         }
       }
-    });
+    })
   }
 })

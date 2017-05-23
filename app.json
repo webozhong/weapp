@@ -13,7 +13,7 @@
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "遇见书画",
     "navigationBarBackgroundColor": "#2A8AE0",
-    "backgroundTextStyle": "WeChat"
+    "backgroundTextStyle": "light"
   },
     "tabBar": {
       "borderStyle": "white",

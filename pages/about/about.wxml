@@ -1,11 +1,26 @@
 <view class="container">
   <view class="logo">
-    <image class="logo-image" src="../../../images/logo.png"></image>
+    <image mode="widthFix" src="../../../images/logo.png"></image>
   </view>
-  <view class="share">
-    <text>做最好的书画鉴赏社区</text>
+  <!--功能介绍-->
+  <view class="features">
+    <text class="title">功能介绍</text>
+    <text>遇见书画是深圳市播众互联网科技有限公司旗下一款产品。本产品聚合众多书法绘画优秀公众号中的优秀内容，为大家提供更加便捷高质的阅读体验。</text>
+    <text>遇见书画中的文章如若侵犯版权，请及时联系我们删除。
+    </text>
+    <text>为了您有更好的阅读体验，如您在阅读过程中有任何问题和建议，请您及时告知我们，以便我们更好的为您服务。</text>
+  </view>
+  <!--联系我们-->
+  <view class="inductive">
+    <text class="title">联系我们</text>
+    <text>公司名称：深圳播众互联网科技有限公司</text>
+    <text>官方网站：www.webozhong.com</text>
+    <text>公司地址：深圳市宝安西乡华源科技创新园D座401</text>
+    <text class="phone" bindtap="callPhone">联系电话：0755-2357-2397</text>
+    <text>Email：longfei@webozhong.com</text>
   </view>
   <view class="copyright">
-    <text>Copyright ©2015-2017 webozhong.com All Right Reserved.</text>
+    <text>Copyright ©2015-2017</text>
+    <text>webozhong.com All Right Reserved.</text>
   </view>
 </view>

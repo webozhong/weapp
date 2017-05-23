@@ -34,9 +34,9 @@ Page({
                 list: res.data,
                 noLost: false
               })
-            }else{
+            } else {
               that.setData({
-                noList : true
+                noList: true
               })
             }
           }

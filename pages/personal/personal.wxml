@@ -29,13 +29,13 @@
   </view>
 
   <!--联系电话-->
-  <view class="hr">
+  <!--<view class="hr">
     <view id="{{array.id[1]}}" class="cell {{array.changeColor[1]?'select':'normal'}}" data-id="1" data-route="" bindtap="callPhone" bindtouchstart="touchstart" bindtouchend="touchend">
       <image class="cell-icon" src="../../images/telephone.png"></image>
       <text class="cell-text" >联系电话</text>
       <image class="cell-icon" src="../../images/forward.png"></image>
     </view>
-  </view>
+  </view>-->
 
   <!--关于我们-->
   <view class="hr">
