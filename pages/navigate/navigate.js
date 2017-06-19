@@ -37,7 +37,7 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-
+        console.log(res);
         var json = null;
         res.data[0].content = JSON.parse(res.data[0].content);
         json = res.data[0].content
@@ -50,6 +50,8 @@ Page({
           date: res.data[0].sourceName + '·' + res.data[0].date,
           title: res.data[0].title
         });
+        console.log(that.data.array.p[0].length);
+        
         //获取屏幕信息
         wx.getSystemInfo({
           success: function (res) {
@@ -102,6 +104,8 @@ Page({
     })
   },
 
+
+
   //收藏按钮触发事件
   onclick: function () {
     var isLogin = wx.getStorageSync('isLogin');
@@ -150,7 +154,25 @@ Page({
           header: { 'content-type': 'application/x-www-form-urlencoded' },
         })
       }
-
     }
-  }
+  },
+  touchImg: function (e) {
+    var nowImgUrl = e.target.dataset.src;
+    
+    var that = this;
+    var allArr = that.data.array.img;
+    var imgArr = [];
+    var length = allArr.length;
+    for (var i = 0; i <= length; i++) {
+      if (allArr[i] != 'empty.jpg' && allArr[i] != undefined) {
+        imgArr.push('https://www.webozhong.com/originals/' + allArr[i]);
+      }
+    }
+    //console.log(imgArr);
+    wx.previewImage({
+      current: nowImgUrl,
+      urls: imgArr,
+    })
+  },
+
 })
