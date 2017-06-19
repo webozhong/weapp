@@ -33,7 +33,7 @@ App({
               success: function (res) {
                 //将用户信息同步保存到全局user中
                 var user = JSON.parse(res.data);
-                wx.setStorageSync('user', user);
+                wx.setStorageSync('user',user);
                 wx.request({
                   url: 'https://www.webozhong.com/api/users/saveuserinfo',
                   data: {
@@ -60,7 +60,7 @@ App({
           },
           fail: function (res) {
             //wx.userInfo接口，用户拒绝授权设置全局属性
-            wx.setStorageSync('isLogin', 'N');
+            wx.setStorageSync('isLogin','N');
           }
         })
       }
