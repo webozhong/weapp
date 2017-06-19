@@ -7,7 +7,7 @@ Page({
     },
 
     //设置头像昵称初始值
-    user : {
+    user: {
       nickName: '点击登录',
       avatarUrl: '../../images/user.png'
     }
@@ -84,11 +84,23 @@ Page({
   // },
   //点击头像栏的操作，如果未登录则调起登录
   onclick: function () {
+    var that = this;
     var isLogin = wx.getStorageSync('isLogin');
     var user = wx.getStorageSync('user');
+    console.log(isLogin, user);
     if (isLogin == "") {
       //console.log('用户未登录且未调起过app.login方法');
       app.login();
+      setTimeout(function(){
+        isLogin = wx.getStorageSync('isLogin');
+        user = wx.getStorageSync('user');
+        console.log(isLogin,user);
+        if (isLogin == "Y") {
+          that.setData({
+            user: user
+          });
+        }
+      },2600);
     }
     else if (isLogin == "N") {
       //console.log('用户调起过app.login方法,但是拒绝了授权');
