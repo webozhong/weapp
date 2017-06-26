@@ -1,6 +1,6 @@
 <view class="container">
   <view class="logo">
-    <image mode="widthFix" src="../../../images/logo.png"></image>
+    <image mode="widthFix" src="../../images/logo.png"></image>
   </view>
   <!--功能介绍-->
   <view class="features">
