@@ -11,7 +11,10 @@ Page({
     ws: 0,
     isCollection: "",
     isCollectionText: "",
-    collNum: 0
+    collNum: 0,
+    startTime:0,
+    endTime:0,
+    duration:0
   },
   onShareAppMessage: function () {
     var that = this;
@@ -22,15 +25,19 @@ Page({
     }
   },
   onLoad: function (options) {
-    //console.log(options);
     var that = this;
+    var newDate = new Date();
+    var startTime = newDate.getTime();
+    that.setData({ startTime: startTime});
+    console.log(options);
+    
     var num = [];
     that.setData({
       id: options.id
     });
     // 页面初始化 options为页面跳转所带来的参数
     wx.request({
-      url: 'https://www.webozhong.com/api/index/getarticleinfo',
+      url: app.http + 'api/index/getarticleinfo',
       data: {
         id: that.data.id
       },
@@ -65,7 +72,7 @@ Page({
     })
     //获得用户对于这篇文章的收藏状态
     wx.request({
-      url: 'https://www.webozhong.com/api/users/iscollection',
+      url: app.http + 'api/users/iscollection',
       data: {
         articleid: this.data.id,
         openid: wx.getStorageSync('user').openId
@@ -89,7 +96,7 @@ Page({
 
     //请求服务器返回该文章收藏总数
     wx.request({
-      url: 'https://www.webozhong.com/api/users/collectionnum',
+      url: app.http + 'api/users/collectionnum',
       data: {
         articleid: this.data.id,
       },
@@ -102,6 +109,34 @@ Page({
         //console.log(that.data.collNum)
       }
     })
+  },
+  //关闭页面时发送数据openId,articleId,duration
+  onUnload:function(){
+    var that = this;
+    var newDate = new Date();
+    var endTime = newDate.getTime();
+    that.setData({ endTime: endTime});
+    var duration = that.data.endTime - that.data.startTime;
+    that.setData({duration:duration});
+    var isLogin = wx.getStorageSync("isLogin");
+    var user = wx.getStorageSync("user");
+
+    if(isLogin == "Y"){
+      wx.request({
+        url: app.http + "api/statistics/article",
+        data:{
+          openId:user.openId,
+          articleId:that.data.id,
+          duration:that.data.duration
+        },
+        method: "POST",
+        header: { 'content-type': 'application/x-www-form-urlencoded' },
+        success: function (res) {
+          console.log(res);
+        }
+      });
+    }
+    console.log(that.data.endTime-that.data.startTime);
   },
 
 
@@ -126,7 +161,7 @@ Page({
         })
         //请求服务器新增收藏记录
         wx.request({
-          url: 'https://www.webozhong.com/api/users/saveusercollection',
+          url: app.http + 'api/users/saveusercollection',
           data: {
             articleid: this.data.id,
             openid: wx.getStorageSync('user').openId
@@ -145,7 +180,7 @@ Page({
 
         //请求服务器删除收藏记录
         wx.request({
-          url: 'https://www.webozhong.com/api/users/delusercollection',
+          url: app.http + 'api/users/delusercollection',
           data: {
             articleid: this.data.id,
             openid: wx.getStorageSync('user').openId
