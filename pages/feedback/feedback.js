@@ -1,4 +1,5 @@
 // pages/logs/logss.js
+let app = getApp();
 Page({
   data:{
     disabled:true,
@@ -35,7 +36,7 @@ Page({
   formSubmit: function(e) {
     var that = this;
     wx.request({
-      url: 'https://www.webozhong.com/api/index/savefeedback',
+      url: app.http + 'api/index/savefeedback',
       data: {
         message:e.detail.value.message,
         number:e.detail.value.number
