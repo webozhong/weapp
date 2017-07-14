@@ -1,5 +1,5 @@
 var app = getApp();
-var url = "https://www.webozhong.com/api";
+var url = app.http + "api";
 var currentPage = 0;
 var key = true;
 var totalPage = 1;
@@ -48,6 +48,8 @@ Page({
     duration: 1000,
     scrollTop: 0,
     floorstatus: null,
+    userId:null,
+    equipment:null,
   },
   //上拉加载
   onReachBottom: function () {
@@ -84,6 +86,15 @@ Page({
         currentPage = 1;
         res.data.page = 1;
         console.log(res);
+        // wx.showToast({
+        //   title: '正在刷新',
+        //   icon:"loading",
+        //   duration:2000,
+        //   mask:true,
+        //   success:function(res){
+        //     console.log(res);
+        //   }
+        // })
       },
     })
     wx.stopPullDownRefresh();
@@ -100,6 +111,45 @@ Page({
 
   onLoad: function (options) {
     var that = this;
+
+    //弹出授权窗口
+    app.login();
+    var isLogin = wx.getStorageSync("isLogin");
+    var user = wx.getStorageSync("user");
+    console.log(isLogin);
+    console.log(user.openId);
+
+    if(isLogin == "Y"){
+      
+      //获取设备信息
+      wx.getSystemInfo({
+        success: function (res) { 
+          that.setData({
+            equipment:res.model
+          });
+        },
+      });
+      //获取当前时间
+      var date = new Date();
+      var time = date.getTime();
+      console.log(typeof time,time)
+      
+      wx.request({
+        url:app.http + "api/statistics/app",
+        data:{
+          openId:user.openId,
+          equipment:that.data.equipment,
+          time:time
+        },
+        method: "POST",
+        header: { 'content-type': 'application/x-www-form-urlencoded' },
+        success:function(res){
+          console.log(res.data);
+        }
+      });
+      
+    }
+    
     var h = 0;
     //获取屏幕信息  
     wx.getSystemInfo({
@@ -119,6 +169,12 @@ Page({
     GetList(that);
 
   },
+  //跳转到广告详情页面
+  toAd:function(){
+    wx.navigateTo({
+      url: '../advertisement/advertisement',
+    })
+  }
 
   //回到顶部
   // backToTop: function () {
