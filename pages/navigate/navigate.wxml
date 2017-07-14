@@ -10,7 +10,11 @@
       <image src="../../images/{{isCollection}}collection.png" class="collection" bindtap="onclick">
       </image>
       <text class="tip">{{isCollectionText}}</text>
-      <text class="tiptext">已有{{collNum}}人收藏</text>
+      <button open-type="share" class="share">
+        <image src="../../images/share.png" class="shareImg"></image>
+      </button>
+      <text class="shareTip">分享</text>
+       <!-- <text class="tiptext">已有{{collNum}}人收藏</text>  -->
     </view>
   </view>
 </view>
