@@ -1,4 +1,5 @@
 var ws = 0;
+let app = getApp();
 Page({
   data: {
     array: {},
@@ -25,7 +26,7 @@ Page({
     console.log(that.data);
     // 页面初始化 options为页面跳转所带来的参数
     wx.request({
-      url: 'https://www.webozhong.com/api/index/getarticleinfo',
+      url: app.http + 'api/index/getarticleinfo',
       data: {
         id: that.data.id
       },
