@@ -8,7 +8,9 @@ App({
    * isLogin == "N"  代表用户调起过wx.login接口但是点击了拒绝，此时用户仍然未登录
    * isLogin == "Y"  代表用户通过wx.login接口或者wx.openSetting接口同意了登录授权，此时user值可用
    */
+  http:"https://www.webozhong.com/",
   login: function () {
+    let that = this;    
     wx.login({
       success: function (res) {
         var code = res.code;
@@ -20,7 +22,7 @@ App({
             var iv = data.iv;
             wx.setStorageSync('isLogin', 'Y');
             wx.request({
-              url: 'https://www.webozhong.com/api/users/login',
+              url: that.http+'api/users/login',
               data: {
                 code: code,
                 rawData: data.rawData,
@@ -35,7 +37,7 @@ App({
                 var user = JSON.parse(res.data);
                 wx.setStorageSync('user',user);
                 wx.request({
-                  url: 'https://www.webozhong.com/api/users/saveuserinfo',
+                  url: that.http + 'api/users/saveuserinfo',
                   data: {
                     openid: user.openId,
                     nickName: user.nickName,
@@ -48,11 +50,7 @@ App({
                   method: 'POST',
                   header: { 'content-type': 'application/x-www-form-urlencoded' },
                   success: function (res) {
-                    if (res.data == 1) {
-                      console.log('保存用户信息成功');
-                    } else {
-                      console.log('保存用户信息失败');
-                    }
+                    console.log(res.data);
                   }
                 })
               }
