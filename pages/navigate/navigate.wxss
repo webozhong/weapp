@@ -19,7 +19,7 @@ text{
 }
 image{
     width: 100%;
-    margin:30rpx;
+    margin-top:30rpx;
 }
 .date{
     font-size: 24rpx;
@@ -29,7 +29,7 @@ image{
 }
 .content{
     width:100%;
-    padding-bottom:100rpx;
+    padding-bottom:200rpx;
 }
 .bottomBar{
     width:100%;
@@ -39,28 +39,188 @@ image{
     position:fixed;
     bottom:0;
     left:0;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2;
 }
-
+.bottomBar .item{
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+}
 .collection{
-    position:absolute;
-    left:10rpx;
-    top:-10rpx;
+    /* position:absolute;
+    left:120rpx;
+    top:-10rpx; */
     width:60rpx;
     height:60rpx;
+    margin-top:0;
 }
 .tip{
-    position:absolute;
-    left:100rpx;
-    top:26rpx;
+    /* position:absolute;
+    left:170rpx;
+    top:26rpx; */
     color: #9499A0;
     font-size: 30rpx;
     font-family: "微软雅黑";
 }
-.tiptext{
+/* .tiptext{
   position: absolute;
   right: 30rpx;
   top:30rpx;
   font-size: 30rpx;
   color: #9499A0;
   font-family: "微软雅黑";
+} */
+.center{
+  text-align:center;
+}
+.share{
+  position:relative;
+  /*left:330rpx;
+  top:24rpx; */
+  display: block;
+  width:55rpx;
+  height:55rpx;
+  background-color:#fff;
+}
+/*去除按钮边框*/
+.share:after{
+  border:none;
+}
+.share .shareImg{
+  position:absolute;
+  left:0;
+  top:0; 
+  display: block;
+  width:100%;
+  height:100%;
+  margin:0; 
+}
+.shareTip{
+  /* position:absolute;
+  left:380rpx;
+  top:26rpx; */
+  color: #9499A0;
+  font-size: 30rpx;
+  font-family: "微软雅黑";
+}
+.comment{
+  /* position:absolute;
+  left:510rpx;
+  top:-10rpx; */
+  width:60rpx;
+  height:60rpx;
+  margin-top:0;
+}
+.commentTip{
+  /* position:absolute;
+  left:560rpx;
+  top:24rpx; */
+  color: #9499A0;
+  font-size: 30rpx;
+  font-family: "微软雅黑";
+}
+
+/* 输入框 */
+.input{
+  position:fixed;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:100rpx;
+   border:1px solid #eee; 
+   /* border-top:1px solid #000;
+  border-bottom:1px solid #000;  */
+  z-index: 10;
+  padding-left:20rpx;
+  padding-right:200rpx;
+  /* border-radius:15rpx; */
+}
+/* 遮罩层 */
+.mask{
+  background-color: rgba(0, 0, 0, 0.3);
+  position:fixed;
+  left:0;
+  top:0;
+}
+/* 底部遮罩层 */
+.bMask{
+  position:fixed;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:100rpx;
+  background-color: #fff;
+  z-index: 5;
+}
+/* 发送按钮 */
+.send{
+  width:120rpx;
+  height:60rpx;
+  position:fixed;
+  right:20rpx;
+  bottom:20rpx;
+  font-size:30rpx;
+  line-height: 60rpx;
+  z-index:11;
+}
+
+/* 评论区样式 */
+.comments{
+  width:100%;
+  padding-bottom:150rpx;
+  padding-left:20rpx;
+  padding-right:20rpx;
+  padding-top:100rpx;
+  background-color: #ebedef;
+}
+.commentItem{
+  padding-left:20rpx;
+  border-bottom:1px solid #9499A0;
+  margin-bottom:30rpx;
+}
+.title2{
+  font-size:50rpx;
+  font-weight:bold;
+  margin-bottom:100rpx;
+}
+/* 头像 */
+.avatar{
+  display: block;
+  width:70rpx;
+  height:70rpx;
+  border-radius: 50%;
+  float:left;
+  margin-top:0;
+}
+/* 昵称 */
+.nickName{
+  font-size:30rpx;
+  float:left;
+  margin-left:20rpx;
+  margin-bottom:30rpx;
+}
+/* 评论内容 */
+.contents{
+  font-size:36rpx;
+  display:block;
+  clear:both;
+  padding-left: 70rpx;
+  padding-right:40rpx;
+  margin-bottom:10rpx;
+  /* 设置或检索当内容超过指定容器的边界时是否断行。 */
+  overflow-wrap:break-word;/*内容将在边界内换行。如果需要，单词内部允许断行。*/
+}
+/* 评论时间 */
+.time{
+  font-size:25rpx;
+  color:#ccc;
+  padding-left:70rpx;
+}
+.noComment{
+  display: block;
+  margin-left:20rpx;
+  font-size:30rpx;
 }
