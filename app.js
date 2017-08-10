@@ -9,6 +9,10 @@ App({
    * isLogin == "Y"  代表用户通过wx.login接口或者wx.openSetting接口同意了登录授权，此时user值可用
    */
   http:"https://www.webozhong.com/",
+  data:{
+    userId: null,
+    equipment: null,
+  },
   login: function () {
     let that = this;    
     wx.login({
@@ -50,6 +54,7 @@ App({
                   method: 'POST',
                   header: { 'content-type': 'application/x-www-form-urlencoded' },
                   success: function (res) {
+                    console.log(222);
                     console.log(res.data);
                   }
                 })
@@ -82,5 +87,57 @@ App({
         }
       }
     })
+  },
+  onLaunch:function(){
+    var that = this;
+    //弹出授权窗口
+    that.login();
+    var isLogin = wx.getStorageSync("isLogin");
+    var user = wx.getStorageSync("user");
+    console.log(isLogin);
+    console.log(user.openId);
+
+    if (isLogin == "Y") {
+
+      //获取设备信息
+      wx.getSystemInfo({
+        success: function (res) {
+          that.data.equipment = res.model;
+        },
+      });
+      // //获取当前时间
+      // var date = new Date();
+      // var time = date.getTime();
+      // console.log(typeof time, time)
+
+      wx.request({
+        url: that.http + "api/statistics/app",
+        data: {
+          openId: user.openId,
+          equipment: that.data.equipment,
+          // time: time
+        },
+        method: "POST",
+        header: { 'content-type': 'application/x-www-form-urlencoded' },
+        success: function (res) {
+          
+          console.log(res.data);
+        }
+      });
+    }
+    // }else{
+    //   wx.request({
+    //     url: that.http + "api/statistics/app",
+    //     data: {
+    //       openId: that.data.userId,
+    //     },
+    //     method: "POST",
+    //     header: { 'content-type': 'application/x-www-form-urlencoded' },
+    //     success: function (res) {
+
+    //       console.log(res.data);
+    //     }
+    //   })
+    // }
   }
 })
