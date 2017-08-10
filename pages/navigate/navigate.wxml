@@ -1,20 +1,62 @@
 <view class="navigate">
+  <!-- 标题 -->
   <view class="title">{{title}}</view>
+  <!-- 出处 -->
+ 
   <text class="date">{{date}}</text>
+  <!-- 内容 -->
   <view class="content">
     <view wx:for="{{num}}" wx:for-item="i" wx:key="num" class="{{array.p[i].length < 20 ? 'center' :''}}">
       <text wx:if="{{array.p[i]!=''&&i>=0}}" >{{array.p[i]}}</text>
       <image data-src="https://www.webozhong.com/originals/{{array.img[i]}}" bindtap="touchImg" src="https://www.webozhong.com/originals/{{array.img[i]}}" style="width:{{ws}}px;height:{{array.height[i]*ws/array.width[i]}}px" wx:if="{{array.img[i]!='empty.jpg'&&array.img[i]!='img.jpg'}}"></image>
     </view>
+
+    <!-- 底部tabbar遮罩层 -->
+    <view class="bMask" style="display:{{bDisplay}}"></view>
+    <!-- 底部tabbar -->
     <view class="bottomBar">
-      <image src="../../images/{{isCollection}}collection.png" class="collection" bindtap="onclick">
-      </image>
-      <text class="tip">{{isCollectionText}}</text>
-      <button open-type="share" class="share">
-        <image src="../../images/share.png" class="shareImg"></image>
-      </button>
-      <text class="shareTip">分享</text>
-       <!-- <text class="tiptext">已有{{collNum}}人收藏</text>  -->
+
+      <!-- 收藏 -->
+      <view class="item1 item">
+        <image src="../../images/{{isCollection}}collection.png" class="collection" bindtap="onclick">
+        </image>
+        <text class="tip">收藏</text>
+      </view>
+      <!-- <text class="tiptext">已有{{collNum}}人收藏</text>  -->
+
+      <!-- 评论 -->
+      <view class="item2 item">
+        <image src="../../images/feedback.png" class="comment" bindtap="comment"></image>
+        <text class="commentTip">评论</text>
+      </view>
+
+      <!-- 分享 -->
+      <view class="item3 item">
+        <button open-type="share" class="share">
+          <image src="../../images/share.png" class="shareImg"></image>
+        </button>
+        <text class="shareTip">分享</text>
+      </view>
+      
+    </view>
+    <!-- 评论输入框 -->
+    <input value="{{value}}" type="text" placeholder="请输入您的评论" confirm-type="send" class="input" style="display:{{iDisplay}}" bindinput="getComment" focus="{{isFocus}}"/>
+    <button class="send" type="primary" style="display:{{iDisplay}}" bindtap="send" disabled="{{isDisabled}}">发送</button>
+
+    <!-- 评论输入框获取焦点时，显示遮罩层 -->
+  <view class="mask" style="width:100%;height:{{hs}}px ;display:{{vDisplay}}" bindtap="mask"></view>
+
+  </view>
+
+  <!-- 用户评论区 -->
+  <view class="comments">
+    <text class="title2">用户评论</text>
+    <view class="noComment" hidden="{{isComment1}}">目前还没有评论，赶快来评论一下吧！</view>
+    <view wx:for="{{commentArray}}" class="commentItem" hidden="{{isComment2}}" wx:key="item.id">
+      <image src="{{item.userInfo[0].avatarUrl}}" class="avatar"></image>
+      <text class="nickName">{{item.userInfo[0].nickName}}</text>
+      <text class="contents">{{item.content}}</text>
+      <text class="time">{{item.time}}</text>
     </view>
   </view>
 </view>
