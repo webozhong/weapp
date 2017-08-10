@@ -9,12 +9,27 @@ Page({
     date: "",
     id: "",
     ws: 0,
-    isCollection: "",
-    isCollectionText: "",
+    hs: 0,
+    // isCollection: "",
+    // isCollectionText: "",
     collNum: 0,
-    startTime:0,
-    endTime:0,
-    duration:0
+    startTime: 0,
+    endTime: 0,
+    duration: 0,
+    iDisplay: "none",
+    vDisplay: "none",
+    bDisplay: "none",
+    comment: '',
+    value: '',
+    avatarUrl:'',
+    nickName:'',
+    time:'',
+    isComment1:false,
+    isComment2:true,
+    commentArray:[],
+    isFocus:false,
+    isDisabled:true,
+
   },
   onShareAppMessage: function () {
     var that = this;
@@ -28,9 +43,9 @@ Page({
     var that = this;
     var newDate = new Date();
     var startTime = newDate.getTime();
-    that.setData({ startTime: startTime});
+    that.setData({ startTime: startTime });
     console.log(options);
-    
+
     var num = [];
     that.setData({
       id: options.id
@@ -58,76 +73,105 @@ Page({
           title: res.data[0].title
         });
         console.log(that.data.array.p[0].length);
-        
+
         //获取屏幕信息
+        var ws = 0;
+        var hs = 0;
         wx.getSystemInfo({
           success: function (res) {
             ws = res.windowWidth - 32;
+            hs = res.windowHeight;
             that.setData({
-              ws: ws
+              ws: ws,
+              hs: hs
             })
           }
         })
       },
     })
     //获得用户对于这篇文章的收藏状态
+    // wx.request({
+    //   url: app.http + 'api/users/iscollection',
+    //   data: {
+    //     articleid: this.data.id,
+    //     openid: wx.getStorageSync('user').openId
+    //   },
+    //   method: 'POST',
+    //   header: { 'content-type': 'application/x-www-form-urlencoded' }, // 设置请求的 header
+    //   success: function (res) {
+    //     if (res.data == 1) {
+    //       that.setData({
+    //         isCollection: 'y',
+    //         isCollectionText: "已收藏",
+    //       })
+    //     } else {
+    //       that.setData({
+    //         isCollection: '',
+    //         isCollectionText: "未收藏"
+    //       })
+    //     }
+    //   }
+    // })
+
+    //请求服务器返回该文章收藏总数
+    // wx.request({
+    //   url: app.http + 'api/users/collectionnum',
+    //   data: {
+    //     articleid: this.data.id,
+    //   },
+    //   method: "POST",
+    //   header: { 'content-type': 'application/x-www-form-urlencoded' },
+    //   success: function (res) {
+    //     that.setData({
+    //       collNum: res.data
+    //     })
+    //     // console.log(that.data.collNum)
+    //   }
+    // })
+
+    //获取用户的评论
     wx.request({
-      url: app.http + 'api/users/iscollection',
+      url: app.http + "api/comments/show",
       data: {
-        articleid: this.data.id,
-        openid: wx.getStorageSync('user').openId
+        articleid: that.data.id,
       },
-      method: 'POST',
-      header: { 'content-type': 'application/x-www-form-urlencoded' }, // 设置请求的 header
+      method: "GET",
       success: function (res) {
-        if (res.data == 1) {
+        console.log("收到数据");
+        console.log(res);
+        if(res.data == "No data"){
           that.setData({
-            isCollection: 'y',
-            isCollectionText: "已收藏",
+            isComment1:false,
+            isComment2:true,
           })
-        } else {
+        }else{
           that.setData({
-            isCollection: '',
-            isCollectionText: "未收藏"
+            isComment1:true,
+            isComment2:false,
+            commentArray:res.data,
           })
         }
       }
     })
-
-    //请求服务器返回该文章收藏总数
-    wx.request({
-      url: app.http + 'api/users/collectionnum',
-      data: {
-        articleid: this.data.id,
-      },
-      method: "POST",
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      success: function (res) {
-        that.setData({
-          collNum: res.data
-        })
-        //console.log(that.data.collNum)
-      }
-    })
   },
   //关闭页面时发送数据openId,articleId,duration
-  onUnload:function(){
+  onUnload: function () {
     var that = this;
     var newDate = new Date();
     var endTime = newDate.getTime();
-    that.setData({ endTime: endTime});
+    that.setData({ endTime: endTime });
     var duration = that.data.endTime - that.data.startTime;
-    that.setData({duration:duration});
+    that.setData({ duration: duration });
     var isLogin = wx.getStorageSync("isLogin");
     var user = wx.getStorageSync("user");
 
-    if(isLogin == "Y"){
+    if (isLogin == "Y") {
       wx.request({
         url: app.http + "api/statistics/article",
-        data:{
-          openId:user.openId,
-          articleId:that.data.id,
-          duration:that.data.duration
+        data: {
+          openId: user.openId,
+          articleId: that.data.id,
+          duration: that.data.duration
         },
         method: "POST",
         header: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -136,7 +180,7 @@ Page({
         }
       });
     }
-    console.log(that.data.endTime-that.data.startTime);
+    console.log(that.data.endTime - that.data.startTime);
   },
 
 
@@ -152,7 +196,7 @@ Page({
     else if (isLogin == "N") {
       console.log('用户调起过app.login方法,但是拒绝了授权');
       app.openSetting();
-    } else if (isLogin == "Y"){
+    } else if (isLogin == "Y") {
       if (this.data.isCollection == '') {
         this.setData({
           collNum: this.data.collNum + 1,
@@ -191,9 +235,10 @@ Page({
       }
     }
   },
+  //图片预览
   touchImg: function (e) {
     var nowImgUrl = e.target.dataset.src;
-    
+
     var that = this;
     var allArr = that.data.array.img;
     var imgArr = [];
@@ -209,5 +254,121 @@ Page({
       urls: imgArr,
     })
   },
+  //评论按钮触发事件
+  comment: function () {
+    var that = this;
+    var isLogin = wx.getStorageSync('isLogin');
+    var user = wx.getStorageSync('user');
 
+    if (isLogin == "") {
+      console.log('用户未登录且未调起过app.login方法');
+      app.login();
+    }
+    else if (isLogin == "N") {
+      console.log('用户调起过app.login方法,但是拒绝了授权');
+      app.openSetting();
+    } else if (isLogin == "Y") {
+      // wx.request({
+      //   url:app.http + "api/comments/show",
+      //   data:{
+      //     articleId:that.data.id,
+      //   },
+      //   method:"GET",
+      //   success:function(res){
+      //     console.log("收到数据");
+      //     console.log(res);
+      //   }
+      // })
+
+      that.setData({
+        vDisplay: "block",
+        iDisplay: "block",
+        bDisplay: "block",
+        isFocus:true,
+      })
+      if(that.data.comment != ''){
+        that.setData({
+          isDisabled:false,
+        })
+      }else{
+        that.setData({
+          isDisabled: true,
+        })
+      }
+    }
+  },
+  //点击遮罩层隐藏输入框和遮罩层，还原。。。
+  mask: function () {
+    var that = this;
+    that.setData({
+      vDisplay: "none",
+      iDisplay: "none",
+      bDisplay: "none",
+      isFocus:false,
+    })
+  },
+  //输入框中输入内容时获取评论内容
+  getComment: function (e) {
+    var that = this;
+    console.log(e.detail.value);
+    that.setData({
+      comment: e.detail.value,
+    })
+    console.log(that.data.comment);
+    if(that.data.comment != ''){
+      that.setData({
+        isDisabled:false,
+      })
+    }else{
+      that.setData({
+        isDisabled:true,
+      })
+    }
+    
+  },
+  //点击发送按钮添加评论
+  send: function () {
+    var that = this;
+    wx.request({
+      url: app.http + "api/comments/add",
+      data: {
+        openId: wx.getStorageSync('user').openId,
+        articleId: that.data.id,
+        content: that.data.comment
+      },
+      method: "POST",
+      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      success: function (res) {
+        wx.request({
+          url: app.http + "api/comments/show",
+          data: {
+            articleid: that.data.id,
+          },
+          method: "GET",
+          success: function (res) {
+            console.log("收到数据");
+            console.log(res.data);
+            if (res.data == "No data") {
+              that.setData({
+                isComment1: false,
+                isComment2: true,
+              })
+            } else {
+              that.setData({
+                value: '',
+                iDisplay: "none",
+                bDisplay: "none",
+                vDisplay: "none",
+                isComment1: true,
+                isComment2: false,
+                commentArray: res.data,
+                isFocus:false,
+              })
+            }
+          }
+        })
+        
+      }
+    })
+  }
 })
