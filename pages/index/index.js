@@ -3,6 +3,7 @@ var url = app.http + "api";
 var currentPage = 0;
 var key = true;
 var totalPage = 1;
+//初次加载列表
 var GetList = function (that) {
   if (key && currentPage < totalPage) {
     key = false;
@@ -15,28 +16,72 @@ var GetList = function (that) {
       // header: {
       //   'content-type': 'application/json'
       // },
-      success: function (res) {
+      success(res) {
+        console.log(res,res.data);
         //console.log(1, res, currentPage, res.data.page);
-        if (currentPage == res.data.page) {
-          for (var i = 0; i < res.data.jsonObj.length; i++) {
-            res.data.jsonObj[i].thumbnails = res.data.jsonObj[i].thumbnails.split(";");
-          };
-          var lists = that.data.list;
-          totalPage = res.data.totalPage;
-          for (var j = 0; j < res.data.jsonObj.length; j++) {
-            lists.push(res.data.jsonObj[j]);
+        if(res.statusCode == 200){
+          if (currentPage == res.data.page) {
+            for (var i = 0; i < res.data.jsonObj.length; i++) {
+              res.data.jsonObj[i].thumbnails = res.data.jsonObj[i].thumbnails.split(";");
+            };
+            var lists = that.data.list;
+            totalPage = res.data.totalPage;
+            for (var j = 0; j < res.data.jsonObj.length; j++) {
+              lists.push(res.data.jsonObj[j]);
+            }
+            that.setData({
+              list: lists,
+            });
+            currentPage++;
           }
-          that.setData({
-            list: lists,
-          });
-          currentPage++;
+        }else if(res.statusCode == 500){
+          GetList(that);
+          wx.startPullDownRefresh({
+            success(res){
+              console.log(res);
+              wx.stopPullDownRefresh();
+            }
+          })    
         }
-      },
-      fail: function () {
+        
       },
     })
   }
 }
+
+//上拉后加载的新列表
+var getNextList = function(that){
+  if (key && currentPage < totalPage) {
+    key = false;
+    //请求服务器的数据
+    wx.request({
+      url: url,
+      data: {
+        page: currentPage
+      },
+      success(res) {
+        console.log(res, res.data);
+       
+          if (currentPage == res.data.page) {
+            for (var i = 0; i < res.data.jsonObj.length; i++) {
+              res.data.jsonObj[i].thumbnails = res.data.jsonObj[i].thumbnails.split(";");
+            };
+            var lists = that.data.list;
+            totalPage = res.data.totalPage;
+            for (var j = 0; j < res.data.jsonObj.length; j++) {
+              lists.push(res.data.jsonObj[j]);
+            }
+            that.setData({
+              list: lists,
+            });
+            currentPage++;
+          }
+      },
+    })
+  }
+}
+
+
 Page({
   data: {
     hidden: true,
@@ -55,7 +100,7 @@ Page({
   onReachBottom: function () {
     var that = this;
     key = true;
-    GetList(that);
+    getNextList(that);
   },
 
   //下拉刷新
@@ -70,7 +115,7 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success: function (res) {
+      success(res) {
         for (var i = 0; i < res.data.jsonObj.length; i++) {
           res.data.jsonObj[i].thumbnails = res.data.jsonObj[i].thumbnails.split(";");
         };
@@ -86,15 +131,7 @@ Page({
         currentPage = 1;
         res.data.page = 1;
         console.log(res);
-        // wx.showToast({
-        //   title: '正在刷新',
-        //   icon:"loading",
-        //   duration:2000,
-        //   mask:true,
-        //   success:function(res){
-        //     console.log(res);
-        //   }
-        // })
+        
       },
     })
     wx.stopPullDownRefresh();
@@ -110,6 +147,7 @@ Page({
   },
 
   onLoad: function (options) {
+
     var that = this;
 
     //弹出授权窗口
@@ -117,7 +155,7 @@ Page({
     var isLogin = wx.getStorageSync("isLogin");
     var user = wx.getStorageSync("user");
     console.log(isLogin);
-    console.log(user.openId);
+    console.log(user);
 
     if(isLogin == "Y"){
       
@@ -129,6 +167,7 @@ Page({
           });
         },
       });
+
       //获取当前时间
       var date = new Date();
       var time = date.getTime();
@@ -145,11 +184,98 @@ Page({
         header: { 'content-type': 'application/x-www-form-urlencoded' },
         success:function(res){
           console.log(res.data);
+        },
+        fail:(res)=>{
+          console.log(res);
         }
       });
-      
+
+
+      //显示用户调查问卷的模态框
+      /*
+      延时两秒调用接口判断用户是否填写过问卷，返回:
+      User reject:用户拒绝填写问卷
+      0:用户允许且未填写新用户问卷，此时推送新用户问卷
+      1:用户允许且已填写新用户问卷，此时推送老用户问卷
+      2:表示用户问卷已经全部填写
+
+      用户点击取消按钮时调用接口将用户保存为拒绝填写类型，返回：
+      0:更新失败
+      1:更新成功
+      */
+
+      //20%几率弹出
+      let ran = parseInt(Math.random() * 5);
+      console.log(ran);
+      if (ran == 0) {
+        setTimeout(() => {
+          wx.request({
+            url: app.http + "api/questionnaires",
+            data: {
+              openid: user.openId,
+            },
+            method: "GET",
+            header: {
+              'content-type': 'application/json'
+            },
+            success(res) {
+              console.log(res.data);
+              if (res.data == 0) {
+                wx.showModal({
+                  title: '用户问卷调查',
+                  content: '请您参与我们的问卷调查，让我们更加进步！',
+                  success(res) {
+                    console.log(res);
+                    if (res.confirm) {
+                      wx.navigateTo({
+                        url: "../questionsNew/questionsNew",
+                      });
+                    } else {
+                      wx.request({
+                        url: app.http + "api/users/request",
+                        data: {
+                          openid: user.openId,
+                        },
+                        method: "POST",
+                        header: { 'content-type': 'application/x-www-form-urlencoded' },
+                        success(res) {
+                          console.log(res);
+                        }
+                      });
+                    }
+                  },
+                })
+              } else if (res.data == 1) {
+                wx.showModal({
+                  title: '用户问卷调查',
+                  content: '请您参与我们的问卷调查，让我们更加进步！',
+                  success(res) {
+                    if (res.confirm) {
+                      wx.navigateTo({
+                        url: "../questionsOld/questionsOld",
+                      });
+                    } else {
+                      wx.request({
+                        url: app.http + "api/users/request",
+                        data: {
+                          openid: user.openId,
+                        },
+                        method: "POST",
+                        header: { "content-type": "application/x-www-form-urlencoded" },
+                        success(res) {
+                          console.log(res);
+                        }
+                      });
+                    }
+                  }
+                })
+              }
+            }
+          });
+        }, 2000);
+      }
     }
-    
+  
     var h = 0;
     //获取屏幕信息  
     wx.getSystemInfo({
@@ -162,12 +288,12 @@ Page({
       }
     })
   },
+  
 
   onShow: function () {
-    //   在页面展示之后先获取一次数据
+    //在页面展示之后先获取一次数据
     var that = this;
     GetList(that);
-
   },
   //跳转到广告详情页面
   toAd:function(){
@@ -190,3 +316,10 @@ Page({
   //   }
   // }
 })
+
+
+
+
+
+
+
