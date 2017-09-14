@@ -1,0 +1,38 @@
+
+<view class="container">
+  <!-- 新用户调查问卷 -->
+  <view class="new">
+    <view class="question1">
+      <text>1.您是如何得知遇见书画的？</text>
+      <radio-group bindchange="change1">
+        <radio color="#1296db" value="A">A:朋友分享</radio>
+        <radio color="#1296db" value="B">B:微信群聊</radio>
+        <radio color="#1296db" value="C">C:其他</radio>
+      </radio-group>
+    </view>
+    <view class="question2">
+      <text>2.书法和绘画您偏爱哪个？</text>
+      <radio-group bindchange="change2">
+        <radio color="#1296db" value="A">A:书法</radio>
+        <radio color="#1296db" value="B">B:绘画</radio>
+        <radio color="#1296db" value="C">C:都喜欢</radio>
+      </radio-group>
+    </view>
+    <view class="question3">
+      <text>3.您的出生年代？</text>
+      <radio-group bindchange="change3">
+        <radio color="#1296db" value="A">A:50</radio>
+        <radio color="#1296db" value="B">B:60</radio>
+        <radio color="#1296db" value="C">C:70</radio>
+        <radio color="#1296db" value="D">D:80</radio>
+        <radio color="#1296db" value="E">E:其他</radio>
+      </radio-group>
+    </view>
+    <view class="question4">
+      <text>4.您关注的其他书法类微信公众号或小程序有哪些？（选填）</text>
+      <textarea placeholder='请您在此输入内容...' maxlength='200' bindinput="change4" value=""></textarea>
+    </view>
+  </view>
+
+  <button class="submit" disabled="{{disabled}}" bindtap="submit">提交</button>
+</view>
