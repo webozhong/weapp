@@ -8,13 +8,16 @@
     "pages/success/seccess",
     "pages/collection/collection",
     "pages/share/share",
-    "pages/advertisement/advertisement"
+    "pages/advertisement/advertisement",
+    "pages/questionsNew/questionsNew",
+    "pages/questionsOld/questionsOld"
   ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "遇见书画",
     "navigationBarBackgroundColor": "#2A8AE0",
     "backgroundTextStyle": "light"
+    
   },
   "tabBar": {
     "borderStyle": "white",
