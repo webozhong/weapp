@@ -1,0 +1,36 @@
+<view class="container">
+<!-- 老用户调查问卷 -->
+   <view class="old">
+    <view class="question1">
+      <text>1.您第一次使用遇见书画是什么时候？</text>
+      <radio-group bindchange="change1">
+        <radio color="#1296db" value="A">A:一星期内</radio>
+        <radio color="#1296db" value="B">B:一个月内</radio>
+        <radio color="#1296db" value="C">C:三个月内</radio>
+        <radio color="#1296db" value="D">D:更长</radio>
+      </radio-group>
+    </view>
+    <view class="question2">
+      <text>2.您认为遇见书画的内容更新速度如何？</text>
+      <radio-group bindchange="change2">
+        <radio color="#1296db" value="A">A:太慢了，我需要更多的浏览内容</radio>
+        <radio color="#1296db" value="B">B:更新速度很适合我</radio>
+        <radio color="#1296db" value="C">C:多少都无所谓，我不常看</radio>
+      </radio-group>
+    </view>
+    <view class="question3">
+      <text>3.如果以不付费的形式在遇见书画中展示您的作品，您愿意吗？</text>
+      <radio-group bindchange="change3">
+        <radio color="#1296db" value="A">A:非常愿意</radio>
+        <radio color="#1296db" value="B">B:不愿意</radio>
+        <radio color="#1296db" value="C">C:如果能够支付我稿费，则愿意</radio>
+      </radio-group>
+    </view>
+     <view class="question4">
+      <text>4.经过您这些天的使用有什么需要我们改进的地方吗？我们非常愿意听取您的批评与建议。（选填）</text>
+      <textarea placeholder='请您在此输入内容...' maxlength='200' bindinput="change4" value=""></textarea>
+    </view>  
+  </view> 
+
+  <button class="submit" bindtap="submit" disabled="{{disabled}}">提交</button>
+</view>
