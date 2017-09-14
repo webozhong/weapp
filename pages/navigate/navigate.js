@@ -60,6 +60,7 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         console.log(res);
+        console.log(res.data);
         var json = null;
         res.data[0].content = JSON.parse(res.data[0].content);
         json = res.data[0].content
@@ -89,29 +90,29 @@ Page({
         })
       },
     })
-    //获得用户对于这篇文章的收藏状态
-    // wx.request({
-    //   url: app.http + 'api/users/iscollection',
-    //   data: {
-    //     articleid: this.data.id,
-    //     openid: wx.getStorageSync('user').openId
-    //   },
-    //   method: 'POST',
-    //   header: { 'content-type': 'application/x-www-form-urlencoded' }, // 设置请求的 header
-    //   success: function (res) {
-    //     if (res.data == 1) {
-    //       that.setData({
-    //         isCollection: 'y',
-    //         isCollectionText: "已收藏",
-    //       })
-    //     } else {
-    //       that.setData({
-    //         isCollection: '',
-    //         isCollectionText: "未收藏"
-    //       })
-    //     }
-    //   }
-    // })
+    // 获得用户对于这篇文章的收藏状态
+    wx.request({
+      url: app.http + 'api/users/iscollection',
+      data: {
+        articleid: this.data.id,
+        openid: wx.getStorageSync('user').openId
+      },
+      method: 'POST',
+      header: { 'content-type': 'application/x-www-form-urlencoded' }, // 设置请求的 header
+      success: function (res) {
+        if (res.data == 1) {
+          that.setData({
+            isCollection: 'y',
+            isCollectionText: "已收藏",
+          })
+        } else {
+          that.setData({
+            isCollection: '',
+            isCollectionText: "未收藏"
+          })
+        }
+      }
+    })
 
     //请求服务器返回该文章收藏总数
     // wx.request({
@@ -139,6 +140,7 @@ Page({
       success: function (res) {
         console.log("收到数据");
         console.log(res);
+        console.log(res.data);
         if(res.data == "No data"){
           that.setData({
             isComment1:false,
