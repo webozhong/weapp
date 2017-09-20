@@ -29,7 +29,7 @@ Page({
     commentArray:[],
     isFocus:false,
     isDisabled:true,
-
+    ishidden:true,
   },
   onShareAppMessage: function () {
     var that = this;
@@ -71,7 +71,8 @@ Page({
           num: num,
           array: json,
           date: res.data[0].sourceName + '·' + res.data[0].date,
-          title: res.data[0].title
+          title: res.data[0].title,
+          ishidden:false,
         });
         console.log(that.data.array.p[0].length);
 
