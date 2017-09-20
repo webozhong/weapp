@@ -49,7 +49,7 @@
   </view>
 
   <!-- 用户评论区 -->
-  <view class="comments">
+  <view class="comments" hidden="{{ishidden}}">
     <!-- <view class="left"></view>  -->
     <text class="title2">用户评论</text>
     <!-- <view class="right"></view>   -->
