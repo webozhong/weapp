@@ -13,12 +13,11 @@ var GetList = function (that) {
       data: {
         page: currentPage
       },
-      // header: {
-      //   'content-type': 'application/json'
-      // },
+      header: {
+        'content-type': 'application/json'
+      },
       success(res) {
-        console.log(res,res.data);
-        //console.log(1, res, currentPage, res.data.page);
+        console.log('初次加载的数据：',res.data);
         if(res.statusCode == 200){
           if (currentPage == res.data.page) {
             for (var i = 0; i < res.data.jsonObj.length; i++) {
@@ -60,7 +59,7 @@ var getNextList = function(that){
         page: currentPage
       },
       success(res) {
-        console.log(res, res.data);
+        console.log('上拉加载的数据：', res.data);
        
           if (currentPage == res.data.page) {
             for (var i = 0; i < res.data.jsonObj.length; i++) {
@@ -154,8 +153,8 @@ Page({
     app.login();
     var isLogin = wx.getStorageSync("isLogin");
     var user = wx.getStorageSync("user");
-    console.log(isLogin);
-    console.log(user);
+    console.log('登录状态：' ,isLogin);
+    console.log('用户信息：',user);
 
     if(isLogin == "Y"){
       
@@ -168,10 +167,11 @@ Page({
         },
       });
 
-      //获取当前时间
+      //获取当前时间戳
       var date = new Date();
       var time = date.getTime();
-      console.log(typeof time,time)
+
+      console.log('当前时间戳：',time);
       
       wx.request({
         url:app.http + "api/statistics/app",
@@ -183,13 +183,12 @@ Page({
         method: "POST",
         header: { 'content-type': 'application/x-www-form-urlencoded' },
         success:function(res){
-          console.log(res.data);
+          return res.data;
         },
         fail:(res)=>{
-          console.log(res);
+          return res.data;
         }
       });
-
 
       //显示用户调查问卷的模态框
       /*
@@ -204,11 +203,17 @@ Page({
       1:更新成功
       */
 
-      //20%几率弹出
-      let ran = parseInt(Math.random() * 5);
-      console.log(ran);
+      //使用随机数判断是否弹出问卷 几率：50%
+      let ran = parseInt(Math.random() * 2);
+
+      console.log('随机数：',ran);
+
       if (ran == 0) {
+
+        //延迟2秒
         setTimeout(() => {
+
+          //查询该用户是否已经拒绝或填写过
           wx.request({
             url: app.http + "api/questionnaires",
             data: {
@@ -219,16 +224,23 @@ Page({
               'content-type': 'application/json'
             },
             success(res) {
+
+              //true：已填写或拒绝 false：未填写
               console.log(res.data);
-              if (res.data == 0) {
+
+              if (!res.data){
+
                 wx.showModal({
-                  title: '用户问卷调查',
-                  content: '请您参与我们的问卷调查，让我们更加进步！',
+                  title: '邀您填写调查问卷',
+                  content: '将“遇见书画”打造成一个拥有极致用户体验的小程序需要我们的不懈努力，更需要您宝贵的意见和建议，我们诚挚的邀请您参与用户体验调查问卷。',
+                  cancelText:'不了',
+                  confirmText:'好的',
                   success(res) {
-                    console.log(res);
-                    if (res.confirm) {
+
+                    //确认跳转到问卷页 否则修改用户状态为拒绝
+                    if (res.confirm) {  
                       wx.navigateTo({
-                        url: "../questionsNew/questionsNew",
+                        url: "../questionnaire/questionnaire",
                       });
                     } else {
                       wx.request({
@@ -239,35 +251,11 @@ Page({
                         method: "POST",
                         header: { 'content-type': 'application/x-www-form-urlencoded' },
                         success(res) {
-                          console.log(res);
+                          return res.data;
                         }
                       });
                     }
                   },
-                })
-              } else if (res.data == 1) {
-                wx.showModal({
-                  title: '用户问卷调查',
-                  content: '请您参与我们的问卷调查，让我们更加进步！',
-                  success(res) {
-                    if (res.confirm) {
-                      wx.navigateTo({
-                        url: "../questionsOld/questionsOld",
-                      });
-                    } else {
-                      wx.request({
-                        url: app.http + "api/users/request",
-                        data: {
-                          openid: user.openId,
-                        },
-                        method: "POST",
-                        header: { "content-type": "application/x-www-form-urlencoded" },
-                        success(res) {
-                          console.log(res);
-                        }
-                      });
-                    }
-                  }
                 })
               }
             }
@@ -280,7 +268,6 @@ Page({
     //获取屏幕信息  
     wx.getSystemInfo({
       success: function (res) {
-        // console.log(res);
         h = res.windowHeight;
         that.setData({
           hs: h
@@ -301,25 +288,4 @@ Page({
       url: '../advertisement/advertisement',
     })
   }
-
-  //回到顶部
-  // backToTop: function () {
-  //   this.setData({ scrollTop: 0 });
-  //   // console.log(event);
-  // },
-  //滚动显隐回到顶部按钮
-  // scrollTo: function (event) {
-  //   if (event.detail.scrollTop > 1000) {
-  //     this.setData({ floorstatus: true });
-  //   } else {
-  //     this.setData({ floorstatus: false });
-  //   }
-  // }
 })
-
-
-
-
-
-
-

@@ -1,0 +1,48 @@
+ .body{
+   width: 90%;
+   margin: 5%;
+}
+
+.question{
+  margin:10% 0%;
+}
+
+ .question text{
+  display: block;
+  margin-bottom:5%;
+  font-family: Microsoft YaHei UI Bold;
+  font-size: 1rem;
+} 
+
+/* 设置前三个问题为弹性盒子布局，两端对齐 */
+.question radio-group{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+radio{
+  margin: 2% 0%;
+  font-family: Microsoft YaHei UI Light;
+  font-size: 0.8rem;
+  
+}
+
+/* 设置文本域的样式 */
+textarea{
+  width:100%;
+  border:1px solid #D5D5D5;
+  margin-bottom:5%;
+  box-sizing: border-box;
+  font-family: Microsoft YaHei UI Light;
+  font-size: 0.8rem;
+  color:black;
+}
+.submit{
+  border:1px solid #D5D5D5;
+  width:90%;
+  background-color: #1296db;
+  color:#ffffff;
+  margin-bottom: 2rem;
+}
+

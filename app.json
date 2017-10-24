@@ -8,9 +8,7 @@
     "pages/success/seccess",
     "pages/collection/collection",
     "pages/share/share",
-    "pages/advertisement/advertisement",
-    "pages/questionsNew/questionsNew",
-    "pages/questionsOld/questionsOld"
+    "pages/questionnaire/questionnaire"
   ],
   "window": {
     "navigationBarTextStyle": "white",

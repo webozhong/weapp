@@ -1,0 +1,69 @@
+<!-- 用户调查问卷 -->
+<view class="body">
+  <view class="question">
+    <text>1. 您是从什么渠道得知遇见书画的？</text>
+    <radio-group bindchange="radio">
+      <radio color="#1296db" value='{"q1":"A"}'>A: 扫描二维码</radio>
+      <radio color="#1296db" value='{"q1":"B"}'>B: 微信搜索</radio>
+      <radio color="#1296db" value='{"q1":"C"}'>C: 公众号关联</radio>
+      <radio color="#1296db" value='{"q1":"D"}'>D: 好友推荐</radio>
+      <radio color="#1296db" value='{"q1":"E"}'>E: 历史纪录</radio>
+    </radio-group>
+  </view>
+  <view class="question">
+    <text>2. 您第一次使用遇见书画是在什么时候？</text>
+    <radio-group bindchange="radio">
+      <radio color="#1296db" value='{"q2":"A"}'>A: 一周前</radio>
+      <radio color="#1296db" value='{"q2":"B"}'>B: 一月前</radio>
+      <radio color="#1296db" value='{"q2":"C"}'>C: 三月前</radio>
+      <radio color="#1296db" value='{"q2":"D"}'>D: 半年前</radio>
+      <radio color="#1296db" value='{"q2":"E"}'>E: 很早就开始使用了</radio>
+    </radio-group>
+  </view>
+  <view class="question">
+    <text>3. 书法和绘画您更偏爱哪个？</text>
+    <radio-group bindchange="radio">
+      <radio color="#1296db" value='{"q3":"A"}'>A: 书法</radio>
+      <radio color="#1296db" value='{"q3":"B"}'>B: 绘画</radio>
+      <radio color="#1296db" value='{"q3":"C"}'>C: 都很喜欢</radio>
+    </radio-group>
+  </view>
+  <view class="question">
+    <text>4. 您的出生年代？</text>
+    <radio-group bindchange="radio">
+
+      <radio color="#1296db" value='{"q4":"A"}'>A: 90年代</radio>
+      <radio color="#1296db" value='{"q4":"B"}'>B: 80年代</radio>
+      <radio color="#1296db" value='{"q4":"C"}'>C: 70年代</radio>
+      <radio color="#1296db" value='{"q4":"D"}'>D: 60年代</radio>
+      <radio color="#1296db" value='{"q4":"E"}'>E: 50年代</radio>
+      <radio color="#1296db" value='{"q4":"F"}'>F: 其他</radio>
+    </radio-group>
+  </view>
+  <view class="question">
+    <text>5. 您认为遇见书画的内容更新速度如何 ？</text>
+    <radio-group bindchange="radio">
+      <radio color="#1296db" value='{"q5":"A"}'>A: 太慢了，我希望能获得更多内容</radio>
+      <radio color="#1296db" value='{"q5":"B"}'>B: 正好合适，非常适合我</radio>
+      <radio color="#1296db" value='{"q5":"C"}'>C: 太快了，内容太多看不过来</radio>
+      <radio color="#1296db" value='{"q5":"D"}'>D: 无所谓快慢</radio>
+    </radio-group>
+  </view>
+  <view class="question">
+    <text>6. 如果以不付费的形式在遇见书画中展示您的作品，您是否愿意？（我们和您双方都无需支付费用）</text>
+    <radio-group bindchange="radio">
+      <radio color="#1296db" value='{"q6":"A"}'>A：愿意</radio>
+      <radio color="#1296db" value='{"q6":"B"}'>B: 不愿意</radio>
+      <radio color="#1296db" value='{"q6":"C"}'>C: 愿意，但应该付给我稿费</radio>
+    </radio-group>
+  </view>
+  <view class="question">
+    <text>7. 除了遇见书画,您还在使用的其他书法类小程序或公众号有哪些？（选填）</text>
+    <textarea placeholder='在此输入内容' maxlength='200' bindinput="completion1" value=""></textarea>
+  </view>
+  <view class="question">
+    <text>8. 请说说您觉得遇见书画做得不好地方，我们希望得到您的批评并以此改进？（选填）</text>
+    <textarea placeholder='您在使用中觉得不方便的地方或是希望增加的新功能，新栏目等等，都可以告诉我们...' maxlength='200' bindinput="completion2" value=""></textarea>
+  </view>
+  <button class="submit" disabled="{{disabled}}" bindtap="submit">提交</button>
+</view>

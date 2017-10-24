@@ -1,4 +1,4 @@
-//app.js
+
 App({
   /**
    * 全局登录方法，这里会调用wx.setStorageSync接口并设置2个值 user,isLogin
@@ -8,13 +8,14 @@ App({
    * isLogin == "N"  代表用户调起过wx.login接口但是点击了拒绝，此时用户仍然未登录
    * isLogin == "Y"  代表用户通过wx.login接口或者wx.openSetting接口同意了登录授权，此时user值可用
    */
-  http:"https://www.webozhong.com/",
-  data:{
+  http: "https://www.webozhong.com/",
+  //http: "http://site.app/",
+  data: {
     userId: null,
     equipment: null,
   },
   login: function () {
-    let that = this;    
+    let that = this;
     wx.login({
       success: function (res) {
         var code = res.code;
@@ -26,7 +27,7 @@ App({
             var iv = data.iv;
             wx.setStorageSync('isLogin', 'Y');
             wx.request({
-              url: that.http+'api/users/login',
+              url: that.http + 'api/users/login',
               data: {
                 code: code,
                 rawData: data.rawData,
@@ -39,7 +40,7 @@ App({
               success: function (res) {
                 //将用户信息同步保存到全局user中
                 var user = JSON.parse(res.data);
-                wx.setStorageSync('user',user);
+                wx.setStorageSync('user', user);
                 wx.request({
                   url: that.http + 'api/users/saveuserinfo',
                   data: {
@@ -54,22 +55,21 @@ App({
                   method: 'POST',
                   header: { 'content-type': 'application/x-www-form-urlencoded' },
                   success: function (res) {
-                    console.log(222);
-                    console.log(res.data);
+
                   }
                 })
               }
             })
           },
           fail: function (res) {
-            //wx.userInfo接口，用户拒绝授权设置全局属性
-            wx.setStorageSync('isLogin','N');
+            //用户拒绝登录授权，设置全局登录标识
+            wx.setStorageSync('isLogin', 'N');
           }
         })
       }
     })
   },
-  
+
   /**
    * 由于wx.login接口在10分钟内只能调用一次，而且不能在代码
    * 中清空授权信息以达到再次调起登录的效果，所以在用户第一次
@@ -77,25 +77,23 @@ App({
    * 时间和次数限制，但是要读取用户的授权状态，授权状态在成功
    * 的回调函数的返回值res.authSetting中，详细参考官方文档
    */
-  openSetting:function(){
+  openSetting: function () {
     var that = this;
     wx.openSetting({
-      success:function(res){
+      success: function (res) {
         var info = res.authSetting;
-        if (info['scope.userInfo']==true){
+        if (info['scope.userInfo'] == true) {
           that.login();
         }
       }
     })
   },
-  onLaunch:function(){
+  onLaunch: function () {
     var that = this;
     //弹出授权窗口
     that.login();
     var isLogin = wx.getStorageSync("isLogin");
     var user = wx.getStorageSync("user");
-    console.log(isLogin);
-    console.log(user.openId);
 
     if (isLogin == "Y") {
 
@@ -105,11 +103,7 @@ App({
           that.data.equipment = res.model;
         },
       });
-      // //获取当前时间
-      // var date = new Date();
-      // var time = date.getTime();
-      // console.log(typeof time, time)
-
+      
       wx.request({
         url: that.http + "api/statistics/app",
         data: {
@@ -120,24 +114,9 @@ App({
         method: "POST",
         header: { 'content-type': 'application/x-www-form-urlencoded' },
         success: function (res) {
-          
-          console.log(res.data);
+          return res.data;
         }
       });
     }
-    // }else{
-    //   wx.request({
-    //     url: that.http + "api/statistics/app",
-    //     data: {
-    //       openId: that.data.userId,
-    //     },
-    //     method: "POST",
-    //     header: { 'content-type': 'application/x-www-form-urlencoded' },
-    //     success: function (res) {
-
-    //       console.log(res.data);
-    //     }
-    //   })
-    // }
   }
 })

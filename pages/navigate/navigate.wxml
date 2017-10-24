@@ -6,7 +6,7 @@
   <!-- 内容 -->
   <view class="content">
     <view wx:for="{{num}}" wx:for-item="i" wx:key="num" class="{{array.p[i].length < 20 ? 'center' :''}}">
-      <text wx:if="{{array.p[i]!=''&&i>=0}}" >{{array.p[i]}}</text>
+      <text wx:if="{{array.p[i]!=''&&i>=0}}">{{array.p[i]}}</text>
       <image data-src="https://www.webozhong.com/originals/{{array.img[i]}}" bindtap="touchImg" src="https://www.webozhong.com/originals/{{array.img[i]}}" style="width:{{ws}}px;height:{{array.height[i]*ws/array.width[i]}}px" wx:if="{{array.img[i]!='empty.jpg'&&array.img[i]!='img.jpg'}}"></image>
     </view>
 
@@ -35,32 +35,33 @@
           <image src="../../images/share.png" class="shareImg"></image>
           <text class="shareTip">分享</text>
         </button>
-        
       </view>
-      
+
     </view>
     <!-- 评论输入框 -->
-    <input value="{{value}}" type="text" placeholder="请输入您的评论" confirm-type="send" class="input" style="display:{{iDisplay}}" bindinput="getComment" focus="{{isFocus}}" maxlength="120"/>
+    <input value="{{value}}" type="text" placeholder="请输入您的评论" confirm-type="send" class="input" style="display:{{iDisplay}}" bindinput="getComment" focus="{{isFocus}}" maxlength="120" />
     <button class="send" type="primary" style="display:{{iDisplay}}" bindtap="send" disabled="{{isDisabled}}">发表</button>
 
     <!-- 评论输入框获取焦点时，显示遮罩层 -->
-  <view class="mask" style="width:100%;height:{{hs}}px ;display:{{vDisplay}}" bindtap="mask"></view>
+    <view class="mask" style="width:100%;height:{{hs}}px ;display:{{vDisplay}}" bindtap="mask"></view>
 
   </view>
 
   <!-- 用户评论区 -->
-  <view class="comments" hidden="{{ishidden}}">
-    <!-- <view class="left"></view>  -->
-    <text class="title2">用户评论</text>
-    <!-- <view class="right"></view>   -->
-    <view class="noComment" hidden="{{isComment1}}">目前还没有评论，赶快留下您的金玉良言吧！</view>
+  <view class="comments">
+    <view class='division'>
+      <view class="left"></view>
+      <text class="commentTitle">精彩评论</text>
+      <view class="right"></view>
+    </view>
+
+    <view class="noComment" hidden="{{isComment1}}">还没有评论哦，快留下您的金玉良言吧！</view>
     <view wx:for="{{commentArray}}" class="commentItem" hidden="{{isComment2}}" wx:key="item.id">
       <image src="{{item.userInfo[0].avatarUrl}}" class="avatar"></image>
       <text class="nickName">{{item.userInfo[0].nickName}}</text>
       <text class="contents">{{item.content}}</text>
       <text class="time">{{item.time}}</text>
     </view>
+    <view class='bottom'></view>
   </view>
 </view>
-
-
